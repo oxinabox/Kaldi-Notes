@@ -6,7 +6,7 @@
 ./compileAndDraw.py dict.fst
 fstcompose sent.fsa dict.fst > strings.fst
 fstdraw --portrait --isymbols=sent.isyms --osymbols=dict.osyms strings.fst | dot -Tsvg >  strings.svg
-echo 'done composing outputted strings.svg'
+echo 'done composing: outputted strings.svg'
 echo 'example sentences'
 
 
