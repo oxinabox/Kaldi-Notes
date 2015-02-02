@@ -6,7 +6,7 @@
 		- Resolution: Build and install libtool, I did so by installing from source: http://ftpmirror.gnu.org/libtool/libtool-2.4.5.tar.gz locally (via configure --prefix)
  - then try and build kaldi, first running .configure
 	- Issue: Needs a BLAS.
-		- Resolution use OpenBlas
+		- Resolution: use OpenBlas
 			- go back to kaldi-trunl/tools and `make openblas` 
 			- use it by running `./configure  --openblas-root=../tools/OpenBLAS/install`
 	- Issue: this Kaldi won&apos;t run with GCC 4.8.4
