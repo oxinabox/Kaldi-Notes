@@ -1,0 +1,8 @@
+0 0 DET the
+0 0 DET a
+0 0 N cat
+0 0 N dog
+0 0 N mouse
+0 0 V chased
+0 0 V bit
+0
