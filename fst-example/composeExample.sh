@@ -9,9 +9,10 @@ fstdraw --portrait --isymbols=sent.isyms --osymbols=dict.osyms strings.fst | dot
 echo 'done composing outputted strings.svg'
 echo 'example sentences'
 
+
 for i in `seq 1 10`;
 do
 	fstrandgen --seed=$RANDOM strings.fst | fstproject --project_output |
-	fstprint --acceptor --isymbols=dict.osyms |
+	fstprint --acceptor --isymbols=dict.syms |
 	awk 'BEGIN{printf("\n")}{printf("%s ",$3)}END{printf("\n")}'
 done

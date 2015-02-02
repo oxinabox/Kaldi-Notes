@@ -16,8 +16,8 @@ print ("-"*32)
 
 fsTextFile = name +'.' + type + '.txt'
 fsFile = name+'.'+type
-osymsFile = name+'.syms'
-isymsFile = name+'.syms'
+osymsFile = name+'.osyms'
+isymsFile = name+'.isyms'
 svgOutputFile = name+'.svg'
 
 isymbols = '--isymbols='+isymsFile
