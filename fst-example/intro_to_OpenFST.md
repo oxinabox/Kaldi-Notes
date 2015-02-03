@@ -1,6 +1,7 @@
 
 
-!(A FST for TIDIGITS)[tidigitsFST.svg)
+![A FST for TIDIGITS](./tidigitsFST.png)
+
 Above: An FST for pronouncing the digits 1-9 and two pronouncations of zero as:  O(o) and zero (z), as used in TIDIGITS
 
 
