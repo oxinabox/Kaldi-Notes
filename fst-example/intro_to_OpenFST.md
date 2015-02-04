@@ -167,7 +167,7 @@ Flags:
  - `--isymbols`, `--osymbols`, as before, but if not provided then symbols in the graphic will be replaced with their numeric repressentation, unless `--keep_isymbols` or `--keep_osymbols` was set in the compile step
  - `--acceptor`: draws a FSA, rather than a FST. Without it it will label the FSA with output labels.
 
-###Compose
+###Compose: `fstcompose`
 Composed a FSA/FST with a FST
  - Usage: `fstcompose [--fst_compat_symbols=false] outer.[fst|fsa] inner.fst output.fst` 
  
