@@ -28,11 +28,11 @@ python makeSymbols.py $fsTextFile 2 > $isymsFile;
 
 if [ $type = "fst" ] ; then
     python makeSymbols.py $fsTextFile 3 > $osymsFile;
-    fstcompile $isymbols $osymbols $fsTextFile $fsFile;
-    fstdraw $isymbols $osymbols --portrait $fsFile  | dot -Tsvg > $svgOutputFile;
+    fstcompile $isymbols $osymbols --keep_isymbols --keep_osymbols $fsTextFile $fsFile;
+    fstdraw --portrait $fsFile  | dot -Tsvg > $svgOutputFile;
 elif [ $type = "fsa" ] ; then
-    fstcompile --acceptor $isymbols $fsTextFile $fsFile;
-    fstdraw --acceptor $isymbols --portrait $fsFile | dot -Tsvg > $svgOutputFile;
+    fstcompile --acceptor $isymbols --keep_isymbols $fsTextFile $fsFile;
+    fstdraw --portrait $fsFile | dot -Tsvg > $svgOutputFile;
 else
     echo "Filetype: ${type} not recognitsed. Recognised types are fst=finite state trasducer and fsa=finite state acceptor";
 fi 
