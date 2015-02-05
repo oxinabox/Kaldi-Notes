@@ -16,6 +16,7 @@ The dataset
 There are Three Steps to applying Kaldi to a task such as this.
 
  1. Data Preparation
+
    * Locating the datafiles
    * Parsing its annotations (eg Speaker Labels, Utterance Labels)
    * Converting the audio data format
