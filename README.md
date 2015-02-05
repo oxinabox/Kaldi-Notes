@@ -1,4 +1,8 @@
-#Kaldi Notes
+---
+layout: post
+title: Kaldi Notes
+---
+
 by Lyndon White
 
  - Notes on [How to install Kaldi](./install_notes.md)
