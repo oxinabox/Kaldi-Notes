@@ -54,6 +54,7 @@ on on the SIP network, the TIDIGITs data set can be found at `/user/data14/res/s
 A Kaldi script file is just a mapping from record_id, to extended-filenames.
 
 Line Format:
+
 '''
 <recording_id> <extended_filename>
 '''
