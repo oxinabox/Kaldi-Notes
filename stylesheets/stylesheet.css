@@ -296,7 +296,7 @@ blockquote {
 
 ul li {
   list-style-position: inside;
-  list-style: disc;
+  list-style: disc !important; //HACK: for nesing UL in OL
   padding-left: 20px;
 }
 
