@@ -36,7 +36,8 @@ There are Three Steps to applying Kaldi to a task such as this.
 
 
 #Data Preparation
-These steps are carried out by the script
+These steps are carried out by the script `local/tidigits_data_prep.sh`.
+
 ##Locate the Dataset 
 on on the SIP network, the TIDIGITs data set can be found at `/user/data14/res/speech_data/tidigits/`. Symlink it into a convient location.
 
