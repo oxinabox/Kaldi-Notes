@@ -16,13 +16,13 @@ The dataset
 There are Three Steps to applying Kaldi to a task such as this.
 
  1. Data Preparation
-     - Locating the datafiles
-     - Parsing its annotations (eg Speaker Labels, Utterance Labels)
-     - Converting the audio data format
+     * Locating the datafiles
+     * Parsing its annotations (eg Speaker Labels, Utterance Labels)
+     * Converting the audio data format
  2. Language Preparation
-     - Creating a Language Model in OpenFST
+     * Creating a Language Model in OpenFST
  3. Training/Evaluating the Speach Recogniser
-     - This is the only step that is actually done in Kali proper, rather than by helper scripts and tools.
-     - Viewing the results is also nontrivial
-    - Kaldi does not store results in the most clear way,
+     * This is the only step that is actually done in Kali proper, rather than by helper scripts and tools.
+     * Viewing the results is also nontrivial
+     * Kaldi does not store results in the most clear way,
 
