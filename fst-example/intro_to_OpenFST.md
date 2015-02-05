@@ -230,6 +230,7 @@ Usage: `bash composeExample.sh`
 ##Example FSTs/FSAs
 This folder contains 3 examples:
 The later two examples of sentence construction are based on ones provided in [these lecture notes](http://www.isle.illinois.edu/sst/courses/minicourses/2009/lecture6.pdf)
+
 ##[simple.fsa.txt](./simple.fst.txt)
 A  very simple Finite State Accepter.
 
