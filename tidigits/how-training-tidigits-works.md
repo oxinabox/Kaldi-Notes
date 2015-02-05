@@ -118,6 +118,29 @@ Each like starts with a speaker id, then has every utterance id they spoke.
 #Language Preparation
 [The offical kaldi documentation on this section](http://kaldi.sourceforge.net/data_prep.html#data_prep_lang).
 
+To understand this section you should first [understand openFST]( ../fst-example/intro_to_OpenFST.md).
+
+## The Lexicon File.
+The example recipy for TIDIGITs is quiet clever about contructing the phoneneme to word FST.
+There script `util/make_lexicon_fst.pl` takes a lexicon file, and outputs a text FST file.
+Each line of the Lexicon file has the format:
+
+```
+<word> <phoneme> <phoneme> <phonen....
+```
+
+ie one word followed by its phonene make up, specified with space delimited symbols.
+
+The Full break-down of how to use it:
+
+Usage: make_lexicon_fst.pl [--pron-probs] lexicon.txt [silprob silphone [sil_disambig_sym]] >lexiconfst.txt
+Creates a lexicon FST that transduces phones to words, and may allow optional silence.
+Note: ordinarily, each line of lexicon.txt is: word phone1 phone2 ... phoneN; if the --pron-probs option is
+used, each line is: word pronunciation-probability phone1 phone2 ... phoneN.  The probability 'prob' will
+typically be between zero and one, and note that it's generally helpful to normalize so the largest one
+for each word is 1.0, but this is your responsibility.  The silence disambiguation symbol, e.g. something
+like #5, is used only when creating a lexicon with disambiguation symbols, e.g. L_disambig.fst, and was
+introduced to fix a particular case of non-determinism of decoding graphs.
 
 #Training/Evaluating Recogniser
 
