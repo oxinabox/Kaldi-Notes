@@ -1,4 +1,5 @@
-
+---
+---
  - Following instructions at: http://kaldi.sourceforge.net/tutorial_setup.html
 
  - first `cd` to `kaldi-trunk/tools` then do a `make -j 8` to build to tools kaldi uses
