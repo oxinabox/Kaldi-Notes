@@ -175,6 +175,7 @@ Flags:
 
 ###Compose: `fstcompose`
 Composed a FSA/FST with a FST
+
  - Usage: `fstcompose [--fst_compat_symbols=false] outer.[fst|fsa] inner.fst output.fst` 
  
 Applying an input to the Output FST is equivelent to first applying it to the Inner then applying the output of that to the Outer. Ie `output(x)=outer(inner(x))`
