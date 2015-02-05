@@ -2,8 +2,6 @@
 layout: default
 title: Kaldi Notes
 ---
+This repository backs a webpage.
 
-by Lyndon White
-
- - Notes on [How to install Kaldi](./install_notes)
- - Notes on [Finite State Transducers and OpenFST](./fst-example/intro_to_OpenFST)
+[Go to the Webpage](http://oxinabox.github.io/Kaldi-Notes/)
