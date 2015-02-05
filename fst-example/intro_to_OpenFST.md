@@ -1,6 +1,7 @@
 ---
-title: Introduction to OpenFST
 layout: default
+
+title: Introduction to OpenFST
 ---
 
 ![A FST for TIDIGITS](./tidigitsFST.png)
