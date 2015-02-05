@@ -29,3 +29,15 @@ There are Three Steps to applying Kaldi to a task such as this.
    * Viewing the results is also nontrivial
    * Kaldi does not store results in the most clear way,
 
+
+
+##Test
+
+1. First
+2. Second:
+	* Fee
+	* Fie
+	* Foe
+3. Third
+
+
