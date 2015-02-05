@@ -1,4 +1,6 @@
 ---
+title: Installing Kaldi
+layout: default
 ---
  - Following instructions at: http://kaldi.sourceforge.net/tutorial_setup.html
 
