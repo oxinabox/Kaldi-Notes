@@ -306,6 +306,10 @@ ol li {
   padding-left: 3px;
 }
 
+ul > li {
+	    margin-left: 10px;
+}
+
 dl dt {
   color: #303030;
 }
