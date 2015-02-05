@@ -9,7 +9,8 @@ Above: An FST for pronouncing the digits 1-9 and two pronouncations of zero as: 
 
 
 #Introduction to Finite State Transducers
-A Weighted Finite State Transducer is a generalisation of a Finite state machine.
+Weighted Finite State Transducers is a generalisations of finite state machines.
+They can be used for many purposed, including implementing algorithms that are hard to write out otherwise -- such as HMMs, as well as for the representation of knowledge -- similar to a grammer.
 
 ##Other places to get information
  - A descent set of slides can be found [here](http://www.gavo.t.u-tokyo.ac.jp/~novakj/wfst-algorithms.pdf)
