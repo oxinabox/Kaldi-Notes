@@ -8,8 +8,8 @@ TIDigits is a comparatively simple connected digits recognition task.
 Like many well-known corpia, Kaldi includes a example script for it.
 It is fairly typical for the example scripts.
 
-The dataset 
-
+The example script can be foung in `kaldi-trunk/egs/tidigits/s5/` all other scripts refered to here are relitive to that path. Kaldi example scripts are all written to be run from that path (or it equivelent in other examples) even if they are located in a subfolder.
+Kaldi example scripts should only be run in `bash`
 
 ##The Three Major Steps
 
@@ -35,5 +35,15 @@ There are Three Steps to applying Kaldi to a task such as this.
 </ol>
 
 
+#Data Preparation
+These steps are carried out by the script
+##Locate the Dataset 
+on on the SIP network, the TIDIGITs data set can be found at `/user/data14/res/speech_data/tidigits/`. Symlink it into a convient location.
 
+##
+
+
+#Language Preparation
+
+#Training/Evaluating Recogniser
 
