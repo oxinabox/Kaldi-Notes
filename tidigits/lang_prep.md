@@ -107,6 +107,10 @@ For more information on disambiguation read the [documentation page](http://kald
 
 ![lexicon fst](./lexiconFST.png)
 
+0 is the inital state (as always),
+and 1 is the only final state.
+Notice there is only one path leaving state 2 and that goes back to 1 via 'sil'.
+Notice also that all states which have a transition to 2, have a identical transition to 1.
 
 ##The Grammer 
 The Lexicon defined how Phonemes make up words.
@@ -153,8 +157,13 @@ The example calls this `G.fst`
 ![grammer fst](./grammerFST.png)
 
 ##The Final Grammer Composed with Lexicon
+The great beuty of working with FSTs in this way is they are composable. 
+There is no need to compose them in this step -- that will be done later when they are also composed with the HMM; but so that you can see what is going on, below is the grammer composed with the lexicon.
 
 ![Lexicon Grammer FST](./LGFST.png)
+
+0 is the initial state. 0 and 4 are the final states.
+
 
 ##HMM Topology
 One could say this was really part of the next step of training.
