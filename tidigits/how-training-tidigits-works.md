@@ -17,24 +17,17 @@ The offical [Kaldi tuitorial](http://kaldi.sourceforge.net/tutorial.html) is a b
 
 There are Three Steps to applying Kaldi to a task such as this.
 
-<ol>
-<li> [Data Preparation](./data_prep):
-<ul>
-   <li> Locating the datafiles</li>
-   <li> Parsing its annotations (eg Speaker Labels, Utterance Labels)</li>
-   <li> Converting the audio data format</li>
-</ul></li>
-<li> [Language Preparation](./lang_prep):
-<ul>
-   <li> Creating a Language Model in OpenFST</li>
-</ul></li>
-<li>[Training/Evaluating the Speach Recogniser](train_eval):
-<ul>
-<li> This is the only step that is actually done in Kali proper, rather than by helper scripts and tools.</li>
-<li> Viewing the results is also nontrivial</li>
-<li> Kaldi does not store results in the most clear way,</li>
-</ul></li
-</ol>
+
+ 1. [Data Preparation](./data_prep):
+    * Locating the datafiles
+    * Parsing its annotations (eg Speaker Labels, Utterance Labels)
+    * Converting the audio data format
+ 2. [Language Preparation](./lang_prep):
+    * Creating a Language Model in OpenFST
+ 3. [Training/Evaluating the Speach Recogniser](train_eval):
+    * This is the only step that is actually done in Kali proper, rather than by helper scripts and tools.
+    * Viewing the results is also nontrivial
+    * Kaldi does not store results in the most clear way,
 
 The full process can be carried out by running `bash run.sh`. Though you most likly need to edit at least the TIDIGITs path, and the `cmd.sh` (so that it is set to run locally, not on a cluster).
 
