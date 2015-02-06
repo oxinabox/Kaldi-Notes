@@ -1,3 +1,7 @@
+---
+layout: default
+title: Language Preparation
+---
 #Language Preparation
 [The offical kaldi documentation on this section](http://kaldi.sourceforge.net/data_prep.html#data_prep_lang).
 
@@ -94,6 +98,3 @@ To quote the tidigits recipe:
 SO L.fst is copied to L_disambig.fst
 
 For more information on disambiguation read the [documentation page](http://kaldi.sourceforge.net/graph.html#graph_disambig).
-
-
-
