@@ -1,3 +1,8 @@
+---
+layout: default
+title: Prerequisite Knowledge
+---
+
 #Required Knowledge
 
 To make use of Kaldi, there is some significant prior required knowledge.
