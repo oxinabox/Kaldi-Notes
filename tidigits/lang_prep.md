@@ -173,3 +173,18 @@ The topo file is expressed in a almost-XML language (not quiet XML as not all op
 All that is required is to copy the template 3 state bakis from `conf/topo.protp`,
 and use `sed` to replace NONSILENCEPHONES, and SILENCEPHONES, with space seperated lists of the integer reresentation of the nonsilent and silent phones respectively.
 
+##Validating Everying has been done correctly so far
+This step is actually carried out in `run.sh` rather than in the `local/tidigits_prepare_lang.sh`.
+
+`util/validate_lang.pl` takes a single argument -- the path the the lang folder.
+It then validates that all things have been set up correctly.
+However there are some waringings for the tidigits setup.
+
+To quote `run.sh`:
+>```utils/validate_lang.pl data/lang/ ```
+> Note; this actually does report errors,
+> and exits with status 1, but we've checked them and seen that they
+> don't matter (this setup doesn't have any disambiguation symbols,
+> and the script doesn't like that).
+
+
