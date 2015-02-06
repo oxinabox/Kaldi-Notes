@@ -11,7 +11,7 @@ It is fairly typical for the example scripts.
 The example script can be foung in `kaldi-trunk/egs/tidigits/s5/` all other scripts refered to here are relitive to that path. Kaldi example scripts are all written to be run from that path (or it equivelent in other examples) even if they are located in a subfolder.
 Kaldi example scripts should only be run in `bash`
 
-The offical [Kaldi tuitorial](http://kaldi.sourceforge.net/tutorial.html) is a bit all over the place, but worth a look, it is no doubt getting better as the software matures.
+The offical [Kaldi tuitorial](http://kaldi.sourceforge.net/tutorial.html) is not perfect (yet), but is a valuable resource. It is linked to in various sections thoughout this document.
 
 ##The Three Major Steps
 
