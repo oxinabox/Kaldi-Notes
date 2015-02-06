@@ -3,7 +3,7 @@ layout: default
 title: Introduction to OpenFST
 ---
 
-![A FST for TIDIGITS](./tidigitsFST.png)
+![A FST for TIDIGITS](../tidigits/lexiconFST.png)
 
 Above: An FST for pronouncing the digits 1-9 and two pronouncations of zero as:  O(o) and zero (z), as used in TIDIGITS
 
@@ -40,6 +40,7 @@ A FSA can be used to check if a string matches its patern -- it is computational
 It can also be used to generate strings which match that pattern.
 
 FSA&apos;s can be treated as FSTs with same input and output symbols at each edge.
+Kaldi example scripts sometimes write them this way.
 
 ###Finite State Transducers (FST)
 A Finite State Transducer extends the Finite State Acceptor wih the addition of:

@@ -98,3 +98,52 @@ To quote the tidigits recipe:
 SO L.fst is copied to L_disambig.fst
 
 For more information on disambiguation read the [documentation page](http://kaldi.sourceforge.net/graph.html#graph_disambig).
+
+###The final lexicon FST
+
+![lexicon fst](./lexiconFST.png)
+
+
+##The Grammer 
+The Lexicon defined how Phonemes make up words.
+The Grammer defines how words make up a sentence.
+The grammer is a weighed FSA.
+It is expressed as a weighted FST in the example script -- a FSA can be considered as a FST with input and output symbols the same.
+
+
+###The States
+As our sentences are made up of digit sequences of length between 1 and 7, this could be rereprensed as a WFSA with 8 states, 7 of which are optionally terminal, and all of which have all digits going to 
+
+It is simpler, and more real world useful, however to take the assumtion that digit sequences can be of any length (greater than 1).
+
+This can be modelled as a FSA, with just one state, which is both initial and terminal,
+and all edges connect to it.
+This is done in the example recipy
+
+### The Transitions
+As a FSA each edge has one label,
+but as it is expressed as a FST this label is put on both input and output.
+
+####The Weights
+We want to relate the weight to the proability of that transition happening.
+After a digit has been said there are 12 possible future actions:
+
+ - A digit from 1-9 is said
+ - o, pronounced Oh is said
+ - z, pronounced zero is said
+ - nothing further is said, as the sentence has ended.
+ 
+it is reasonable to assume each of there 12 options is equally likely.
+So they each have a probability of 1/12th.
+
+In there circumstances it is normal to work with negitive log probabilities for numerical stability.
+`-ln(1/2)=2.48490664979...`. This can just be put in to the final like of each column in the FST.
+The example recipy uses an inline perl to calculate it on the fly (but is is not expressed in any more digits).
+
+###Comile and Arc Sort
+The FST is comiled and arcsored just as for the lexicon.
+The example calls this `G.fst`
+
+###The final grammer FST
+
+![grammer fst](./grammerFST.png)
