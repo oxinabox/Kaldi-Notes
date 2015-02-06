@@ -5,7 +5,11 @@ title: Language Preparation
 #Language Preparation
 [The offical kaldi documentation on this section](http://kaldi.sourceforge.net/data_prep.html#data_prep_lang).
 
+This section covers the same content as the recipe script in `/local/tidigits_prepare_lang.sh`
+
 To understand this section you should first [understand openFST]( ../fst-example/intro_to_OpenFST.md).
+
+
 
 ##The Phones
 Kaldi expects a number of files to be in the `data/lang/phones/` directory.
@@ -147,3 +151,25 @@ The example calls this `G.fst`
 ###The final grammer FST
 
 ![grammer fst](./grammerFST.png)
+
+##HMM Topology
+One could say this was really part of the next step of training.
+However it is covered in the sample script for this section at `/local/tidigits_prepare_lang.sh`.
+
+The actual action to be taken is very simple.
+Understanding why takes some knowledge of HMMs.
+
+The HMM Topology defines how the HMM that is going to be created for the Phones works.
+In most cases the 3 state Bakis model is used.
+
+To get a idea what is really going on under the hood, 
+read [this page of the documentation](http://kaldi.sourceforge.net/hmm.html).
+
+In short, topo files define instrunctions for how to build Hidden Markov Models (HMMs) -- what states are linked to others.
+
+The topo file is expressed in a almost-XML language (not quiet XML as not all opened tags have close tags, only ones that have other elements nested inside them.). Kaldi uses this, and will eventually at somepoint internally produce a WFSTs that is the HMM. Which you might find in OpenFST literiture refered to as H, to go with the lexicon L and the grammer G.
+
+###In practice
+All that is required is to copy the template 3 state bakis from `conf/topo.protp`,
+and use `sed` to replace NONSILENCEPHONES, and SILENCEPHONES, with space seperated lists of the integer reresentation of the nonsilent and silent phones respectively.
+
