@@ -152,6 +152,10 @@ The example calls this `G.fst`
 
 ![grammer fst](./grammerFST.png)
 
+##The Final Grammer Composed with Lexicon
+
+![Lexicon Grammer FST](./LGFST.png)
+
 ##HMM Topology
 One could say this was really part of the next step of training.
 However it is covered in the sample script for this section at `/local/tidigits_prepare_lang.sh`.
