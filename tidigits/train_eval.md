@@ -3,7 +3,7 @@ layout: default
 title: Training & Evaluation
 ---
 
-#Controlled remote vs local excution: `cmd.sh`
+####Controlled remote vs local excution: `cmd.sh`
 Kaldi is designed to work with SunGrid clusters.
 It also work with other clusters.
 We want to run it locally, it can do that too.
