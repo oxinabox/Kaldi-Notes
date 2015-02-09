@@ -198,6 +198,8 @@ but do not have space to detail include;
 
 Several scripts are provided here to demonstrate how to make use of OpenFST,
 and to make using it easier.
+They can be downloaded from the [Git backing this site](https://github.com/oxinabox/Kaldi-Notes/tree/gh-pages/fst-example).
+
 
 ###NOTE: The example scripts assume `openfst/bin` is in your `PATH`.
 Add to your .bashrc (or similar) `PATH="<...>/kaldi-trunk/tools/openfst/bin:${PATH}"`, where `<...>` is the math to the kaldi-trunk folder.
