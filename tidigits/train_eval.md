@@ -68,7 +68,7 @@ THey could also be set by editting the defaults in `steps/train_mono.sh`, but th
  * `cmvn_opts`  options will be passed on to cmvn -- like scale_opts. (default `""`)
  * `stage`: This is used to allow you to skip some steps, if the program crashed partway though. The stage variable sets the stage to start at. The stages are discussed in the next section (default `-4`)
 
-### Initiallisatation Stages
+### Initialisation Stages
 
 ####Initialise GMM (Stage -3)
 Uses `/kaldi-trunk/src/gmmbin/gmm-init-mono`.
@@ -89,16 +89,42 @@ Call that with the `--help` option for more info.
 ####Estimate Gaussians (Stage 0)
 Do the  maximum likelihood estimation of GMM-based acoustic model.
 Uses `/kaldi-trunk/src/gmmbin/gmm-est`.
-Call that with the `--help` option for more info.
+Call that with the `--help` option for more info. 
 
 The script notes:
-
 >In the following steps, the `--min-gaussian-occupancy=3` option is important, otherwise
 > we fail to est[imate] "rare" phones and later on, they never align properly.
 
 
 
-###Training
+###Training (Stage = Iterations completed)
+Every Iteration a number of steps are carried out.
+
+####Realign
+If this iteration is one of the `realign_iters` then:
+
+#####Boost Silence
+Silence is boosted using `/kaldi-trunk/src/gmmbin/gmm-boost-silence`,
+Call that with the `--help` option for more info.
+Notably it does not nesc boost the silence phone (but it does in this training case), it can boost any phone.
+It does this by modifying the GMM weights, to make silence more probable.
+
+#####Align 
+Features are aligned given the GMM models.
+Uses `kaldi-kaldi/src/gmmbin/gmm-align-compiled`.
+Call that with the `--help` option for more info.
+
+###Reestimate the GMM model.
+First accumulate stats which are used in the next step.
+This is done using `/kaldi-trunk/src/gmmbin/gmm-acc-states-ali`.
+Call that with the `--help` option for more info.
+
+Then redo the GMM-based acoustic model.
+This is done with  `/kaldi-trunk/src/gmmbin/gmm-est`, but using very different arguments.
+Again call that with the `--help` option for more info.
+
+
+Finally, increase the number of Gaussians (capped by `max_iter_inc`), so that by the time all the iterations (`num_iters`) are all complete, it will approach the target total number of gaussians (`totgauss`) -- assuming `max_iter_inc` did not block it.
 
 
 ##Making of the Graph
