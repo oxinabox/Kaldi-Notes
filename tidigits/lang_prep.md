@@ -163,7 +163,9 @@ There is no need to compose them in this step -- that will be done later when th
 ![Lexicon Grammer FST](./LGFST.png)
 
 0 is the initial state. 0 and 4 are the final states.
-
+This FST maps phones (from the lexicon) to strings of words which are allowed by the Grammer.
+However, since the Grammer is so permissive (no restrictions at all on order of words),
+this looks very smilar to the Lexicon FST. It is infact equivelent to the Kleene closure of the Lexicon FST.
 
 ##HMM Topology
 One could say this was really part of the next step of training.

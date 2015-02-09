@@ -22,7 +22,18 @@ rather than making references to `queue.pl`.
 The majority of what is done covered by this page, 
 is triggered by the script `run.sh`
 
-##Extracting the MFCC Features
+
+
+## Feature Extraction
+
+###Extracting the MFCC Features
 
 [Mel-frequency cepstral coefficient](http://en.wikipedia.org/wiki/Mel-frequency_cepstrum)  (MFCCs) features.
 
+##Training
+
+##Making of the Graph
+
+##Decoding
+
+##Reading experiment Results
