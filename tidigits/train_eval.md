@@ -6,7 +6,7 @@ title: Training & Evaluation
 #Controlled remote vs local excution: `cmd.sh`
 Kaldi is designed to work with SunGrid clusters.
 It also work with other clusters.
-We want to run it locally.
+We want to run it locally, it can do that too.
 This can be done by making sure cmd.sh sets the variables as follows:
 
 ```
@@ -66,9 +66,39 @@ THey could also be set by editting the defaults in `steps/train_mono.sh`, but th
  *  `realign_iters` iterations in which to perform realignment (default `"1 2 3 4 5 6 7 8 9 10 12 14 16 18 20 23 26 29 32 35 38"`)
  * `power`  exponent to determine number of gaussians from occurrence counts (detault `0.25`)
  * `cmvn_opts`  options will be passed on to cmvn -- like scale_opts. (default `""`)
- * `stage`: This is used to allow you to skip some steps, if the program crashed partway though. It is best to read the source of the script if you are going to mess with it. (default `-4`)
+ * `stage`: This is used to allow you to skip some steps, if the program crashed partway though. The stage variable sets the stage to start at. The stages are discussed in the next section (default `-4`)
 
-#
+### Initiallisatation Stages
+
+####Initialise GMM (Stage -3)
+Uses `/kaldi-trunk/src/gmmbin/gmm-init-mono`.
+Call that with the `--help` option for more info
+
+This defines (amoung other things), how many GMMs there are initially.
+
+
+####Compile Training Graphs (Stage -2)
+uses `/kaldi-trunk/source/bin/compile-training-graphs`.
+Call that with the `--help` option for more info.
+
+####Align Data Equally (Stage -1)
+Creates an equally spaced alignment. As a starting point for further alignment stages.
+Uses `/kaldi-trunk/source/bin/align-equal-compiled`.
+Call that with the `--help` option for more info.
+
+####Estimate Gaussians (Stage 0)
+Do the  maximum likelihood estimation of GMM-based acoustic model.
+Uses `/kaldi-trunk/src/gmmbin/gmm-est`.
+Call that with the `--help` option for more info.
+
+The script notes:
+
+>In the following steps, the `--min-gaussian-occupancy=3` option is important, otherwise
+> we fail to est[imate] "rare" phones and later on, they never align properly.
+
+
+
+###Training
 
 
 ##Making of the Graph
