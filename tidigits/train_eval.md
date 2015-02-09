@@ -38,7 +38,7 @@ Done using the script `steps/compute_cmvn_stats.sh`
 Done using the script `steps/train_mono.sh`
 
 ###Configuration.
-The train_mono script takes many configuration options.
+The `train_mono` script takes many configuration options.
 They can be set by passing them as flags to script: as so: `--<option-name> <value>`.
 Or by putting them all into a config bash script, and adding the flag `--config <path>`.
 THey could also be set by editting the defaults in `steps/train_mono.sh`, but there is no good reason to do this.
@@ -53,14 +53,13 @@ THey could also be set by editting the defaults in `steps/train_mono.sh`, but th
  * `num_iters` Number of iterations of training (default `40`)
  * `max_iter_inc`  Last iter to increase number of Gaussians on (default `30`)
  * `totgauss` Target number of Gaussians (detault `1000`)
- * careful=false
-boost_silence=1.0 # Factor by which to boost silence likelihoods in alignment
-realign_iters="1 2 3 4 5 6 7 8 9 10 12 14 16 18 20 23 26 29 32 35 38";
-config= # name of config file.
-stage=-4
-power=0.25 # exponent to determine number of gaussians from occurrence counts
-norm_vars=false # deprecated, prefer --cmvn-opts "--norm-vars=false"
-cmvn_opts=  # can be used to add extra options to cmvn.
+ *  `careful` passed on to gmm-align-compiled. To quote its documention: "If true, do 'careful' alignment, which is better at detecting alignment failure (involves loop to start of decoding graph)." (default `false`)
+ * `boost_silence` Factor by which to boost silence likelihoods in alignment. (Default `1.0`)
+ *  `realign_iters` iterations in which to perform realignment (default `"1 2 3 4 5 6 7 8 9 10 12 14 16 18 20 23 26 29 32 35 38"`)
+ * `power`  exponent to determine number of gaussians from occurrence counts (detault `0.25`)
+ * `cmvn_opts`  options will be passed on to cmvn -- like scale_opts. (default `""`)
+ * `stage`: This is used to allow you to skip some steps, if the program crashed partway though. It is best to read the source of the script if you are going to mess with it. (default `-4`)
+
 #
 
 
