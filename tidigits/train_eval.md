@@ -36,8 +36,16 @@ Done using the script `steps/compute_cmvn_stats.sh`
 
 ##Training
 Done using the script `steps/train_mono.sh`
+Usage:
 
-###Configuration.
+```
+steps/train_mono.sh [options] <training-data-dir> <lang-dir> <exp-dir>"
+```
+ - `training-data-dir` is the path to the training data directory [prepaired earlier](./data_prep)
+ - `lang-dir` is the path the the directory containing all the language model files, [also prepared earlier](./lang_prep)
+ - `exp-dir` is a path for the training to store all of its outputs. It will be created if it does not exist.
+
+###Configuration / Options 
 The `train_mono` script takes many configuration options.
 They can be set by passing them as flags to script: as so: `--<option-name> <value>`.
 Or by putting them all into a config bash script, and adding the flag `--config <path>`.
