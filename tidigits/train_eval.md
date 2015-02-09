@@ -29,8 +29,23 @@ is triggered by the script `run.sh`
 ###Extracting the MFCC Features
 
 [Mel-frequency cepstral coefficient](http://en.wikipedia.org/wiki/Mel-frequency_cepstrum)  (MFCCs) features.
+Done using the script `steps/make_mfcc.sh`
+
+####Compute Cepstral Mean and Variance Normalization statistics
+Done using the script `steps/compute_cmvn_stats.sh`
 
 ##Training
+Done using the script `steps/train_mono.sh`
+
+###Configuration.
+The train_mono script takes many configuration options.
+They can be set by passing them as flags to script: as so: `--<option-name> <value>`.
+Or by putting them all into a config bash script, and adding the flag `--config <path>`.
+THey could also be set by editting the defaults in `steps/train_mono.sh`, but there is no good reason to do this.
+
+
+
+
 
 ##Making of the Graph
 
