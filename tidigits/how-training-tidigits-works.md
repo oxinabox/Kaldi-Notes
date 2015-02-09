@@ -29,7 +29,9 @@ There are Three Steps to applying Kaldi to a task such as this.
     * Parsing its annotations (eg Speaker Labels, Utterance Labels)
     * Converting the audio data format
  2. [Language Preparation](./lang_prep):
-    * Creating a Language Model in OpenFST
+    * Create Lexicon (Phoneme/Word dictionary)
+    * Create Grammer (Word Language Model)
+    
  3. [Training/Evaluating the Speach Recogniser](train_eval):
     * This is the only step that is actually done in Kali proper, rather than by helper scripts and tools.
     * Viewing the results is also nontrivial
