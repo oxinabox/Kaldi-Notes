@@ -56,14 +56,15 @@ body {
   background: #e7e7e7 url(../images/body-bg.png) 0 0 repeat;
 }
 
-/*
+
 a {
   color: #d5000d;
+  text-decoration: underline;
 }
 a:hover {
-  color: #c5000c;
+  color: #a5000a;
 }
-*/
+
 
 header {
   padding-top: 35px;
