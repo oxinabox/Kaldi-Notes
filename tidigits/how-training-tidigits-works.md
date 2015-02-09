@@ -11,7 +11,7 @@ It is fairly typical for the example scripts.
 The example script can be foung in `kaldi-trunk/egs/tidigits/s5/` all other scripts refered to here are relitive to that path. Kaldi example scripts are all written to be run from that path (or it equivelent in other examples) even if they are located in a subfolder.
 Kaldi example scripts should only be run in `bash` -- they will not nescisarily work in other POSIX shells.
 
-Be aware that lot of the recipy code is shared between WSJ (Wall Street Journal), and all the other examples (including TIDIGITs).
+Be aware that a lot of the recipy code is shared between WSJ (Wall Street Journal), and all the other examples (including TIDIGITs).
 the `util/` and `steps/` folders in most of the example folders (including that for TIDIGITs0),
 is a symlink to the matching folders in the WSJ example. You can very well make use of these script utils and steps in your own recipies.
 
