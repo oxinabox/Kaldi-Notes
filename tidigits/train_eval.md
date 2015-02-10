@@ -82,6 +82,8 @@ This defines (amoung other things), how many GMMs there are initially.
 uses `/kaldi-trunk/source/bin/compile-training-graphs`.
 Call that with the `--help` option for more info.
 
+See [this section of the documentation](http://kaldi.sourceforge.net/graph_recipe_train.html).
+
 ####Align Data Equally (Stage -1)
 Creates an equally spaced alignment. As a starting point for further alignment stages.
 Uses `/kaldi-trunk/source/bin/align-equal-compiled`.
@@ -184,4 +186,55 @@ makes use of `/kaldi-trunk/src/fstbin/fstcomposecontext`, take a look at its `--
 
 ##Decoding
 
-##Reading experiment Results
+Decoding of th Graph is done using `steps/decode.sh`.
+This script only works only for certain feature types -- conviently all the feature types we use in TIDIGITS. (Similar decoding functions also exist in steps, for other feature types)
+
+###Usage for `steps/decode.sh`
+
+Usage:
+```
+steps/decode.sh [options] <graph-dir> <test-data-dir> <decode-dir>
+```
+
+ - `test-data-dir` is the path to the training data directory [prepaired earlier](./data_prep)
+ - `graph-dir` is the path the the directory containing the graphs generated in the previous step
+ - `decode-dir` is a path to store all of its outputs -- including the results of the evaluations. It will be created if it does not exist.
+
+###Configuration / Options 
+The `decode.sh` script takes many configuration options, this should be familar from the `train_mono.sh` script options above.
+They can be set by passing them as flags to script: as so: `--<option-name> <value>`.
+Or by putting them all into a config bash script, and adding the flag `--config <path>`.
+They could also be set by editting the defaults in `steps/decode.sh`, but there is no good reason to do this.
+
+
+ * `nj`: Number of Jobs to run in parrellel. (default `4`) 
+ * `cmd`:  Job dispatcher script  (default `run.pl`)
+
+
+ * `iter`: Iteration of model to test. Training step above actually stores a copy of the model for each iteration. This option can be used to go back and test that (default final trained model). Overridden by `model` option.
+ * `model`: which model to use, given by path. If given this overides the `iter` (default determined by valure of `iter`)
+ 
+ * `transform-dir` directory path to find fMLLR transforms (Not useful for TIDIGITS). (default: N/A only used if fMLLR transformed were done on features.)
+ * `scoring-opts` options to local/score.sh. Can be used to set min and max Language Model Weight for rescoring to be done. (default: "")
+ * `num-threads` number of threads to use, (default 1).
+ *  --parallel-opts <opts>                           # e.g. '-pe smp 4' if you supply --num-threads 4
+ * `stage`: This is used to allow you to skip some steps, as above. However decode only has 2 stages. If stage is greater than 0 will skip decoding and just do scoring. (default `0`)
+
+Options passed on to `kaldi-trunk/src/gmmbin/gmm-latgen-faster`:
+
+ * `acwt` acoustic scale applied to accoustic likelyhoods applied in lattice generation (default 0.083333). It affects the pruning of the latice (low enough likelyhood will be pruned).
+ * `max_active` (default 7000)
+ * `beam` decoding beam (default 13.0)
+ * `lattice_beam` latice generation beam (default 6.0)
+
+
+
+
+###Lattices
+[This blog post](http://codingandlearning.blogspot.com.au/search/label/KWS14) gives an introduction to the Latices in Kaldi quiet well.
+ Quoting from it:
+
+ >To decode an utterance with T frames, the WFST interpretation is as follows. We construct an accepter, or WFSA (WFST with the same input and output symbol for all the arcs). It has T+1 states, with an arc for each cobmination of (time, context-dependent HMM state). The costs on there arcs correspond to negated and scaled acoustic log-likelihood. Call this acceptor U, then the complete search space is:
+ S= U * HCLG, where * represents the composition operation and HCLG is the decoding graph generated for Kaldi. HCLG integrates the HMM transition, context expansion, lexicon and most importantly the language model. In composition, the weights are added together. As they are negated log-likelihoods, it is effectively multiplying the original probabilities
+
+
