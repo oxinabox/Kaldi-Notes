@@ -35,7 +35,8 @@ Done using the script `steps/make_mfcc.sh`
 Done using the script `steps/compute_cmvn_stats.sh`
 
 ##Training
-Done using the script `steps/train_mono.sh`
+Done using the script `steps/train_mono.sh`, However very similar steps are used in the other training scripts from in `steps` (such as `steps/train_deltas`).
+
 Usage:
 
 ```
@@ -128,6 +129,58 @@ Finally, increase the number of Gaussians (capped by `max_iter_inc`), so that by
 
 
 ##Making of the Graph
+
+As showing earlier, the Grammer (G) can be composed with the Lexicon (L),
+to get a phoneme to word mapping.
+
+To increase the power of the phones, they could be expanded to add context.
+For example making the 'ay' phone in 'n-ay-n' (nine) different from the one in 'm-ay-n' (mine).
+This can be done with a Contrext dependancy FST, which can be scaled
+with the number of phones to take into account in the context.
+This is roughly equivelent to making use of n-grams on the phonetic level. Using 3 (ie one ot each side) context is refered to a triphones.
+
+The Context Dependency can be expressed as a FST, refered to as C.
+
+
+
+[This blog post](http://vpanayotov.blogspot.com.au/2012/06/kaldi-decoding-graph-construction.html) presents the details of the creation quiet well. It will be a bit of revision from the data preparation step.
+
+
+###Usage of `util/mkgraph.sh`
+The final graph is created using `util/mkgraph.sh`
+To quote the introduction to that script:
+> ...creates a fully expanded decoding graph (HCLG) that represents
+> all the language-model, pronunciation dictionary (lexicon), context-dependency,
+> and HMM structure in our model.  The output is a Finite State Transducer
+> that has word-ids on the output, and pdf-ids on the input (these are indexes
+> that resolve to Gaussian Mixture Models).
+
+It also creates the afformentioned Context Dependency Graph.
+
+Usage: 
+
+```
+utils/mkgraph.sh [options] <lang-dir> <model-dir> <graphdir>
+```
+
+ - `lang-dir` is, as before, the path the the directory containing all the language model files, [also prepared earlier](./lang_prep)
+ - `model-dir` is the `exp-dir` from the previous train-mono step, which now contained the trained model.
+ - `graph-dir` is the directory to place the final graph in. In the example script this is made as a graph subdirectory under the `exp-dir`. If it does not exist, it will be created
+
+ - 
+
+####Context Options
+There are 3 options for defing how many phones are used to create the context.
+theres are pathsed as the options to the `utils/mkgraph.sh` script
+
+ - ` --mono` for monophone ie one phone ie no context (Used in `steps/train_mono.sh`)
+ - no flag (default) for triphone ie 3 phones ie one phone ot each side for context
+ - `--quinphone` for quinphone ie 5 phones ie 2 phones to each side for context
+
+It would not be hard to extend the mkgraph script to create contexts of any length.
+The section of the mkgraph script responsible for this,
+makes use of `/kaldi-trunk/src/fstbin/fstcomposecontext`, take a look at its `--help` for more information.
+
 
 ##Decoding
 

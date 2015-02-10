@@ -16,8 +16,12 @@ the `util/` and `steps/` folders in most of the example folders (including that 
 is a symlink to the matching folders in the WSJ example. You can very well make use of these script utils and steps in your own recipies.
 
 
+####Other Resources:
 
-The offical [Kaldi tuitorial](http://kaldi.sourceforge.net/tutorial.html) is not perfect (yet), but is a valuable resource. It is linked to in various sections thoughout this document.
+ - The offical [Kaldi tuitorial](http://kaldi.sourceforge.net/tutorial.html) is not perfect (yet), but is a valuable resource. It is linked to in various sections thoughout this document.
+
+ - [This tuitorial](http://analytcz.com/kaldi-hybrid-mlphmm-asr-2/) seems good. Its webhosting does not seem stable, right now the [google cached version can be used](http://webcache.googleusercontent.com/search?q=cache:z-MGlCv917sJ:analytcz.com/kaldi-hybrid-mlphmm-asr-2/)
+
 
 ##The Three Major Steps
 
