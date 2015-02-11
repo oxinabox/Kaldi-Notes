@@ -40,7 +40,7 @@ The symlinking can be done with the following shell script:
 ```
 for a in  `find . -type f -executable -print`;
 do
-ln -s $a bins
+ln -s `pwd`/$a bins
 done
 ```
 This will put them all into the bins directory.
