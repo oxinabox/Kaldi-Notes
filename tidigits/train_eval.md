@@ -331,9 +331,8 @@ we can go down to draw them at the phone level.
 ```
 lattice-to-phone-lattice exp/mono0a/final.mdl "ark:gunzip -c exp/mono0a/decode/lat.1.gz|" ark,t:1.ph.lats
 lattice-copy --write-compact=false ark:1.ph.lats ark,t:1.ph.fsts
-utils/int2sym.pl -f 4 data/lang/phones.txt 1.ph.fsts > 1.ph.txt.fsts
-cat 1.ph.txt.fsts | awk 'BEGIN{FS = " "}{ if (NF>=4) {print $1," ", $2," ",$3," ",$4;} else {print $1;};}' > 1.ph.txt.fsts
-
+utils/int2sym.pl -f 4 data/lang/phones.txt 1.ph.fsts > 1.ph.txt.wfsts
+cat 1.ph.txt.wfsts | awk 'BEGIN{FS = " "}{ if (NF>=4) {print $1," ", $2," ",$3," ",$4;} else {print $1;};}' > 1.ph.txt.fsts
 ```
 
 Notice that in the first step the model (final.mdl)  was also used.
@@ -346,7 +345,21 @@ With that done we now have something that looks like a collection txt.fst, howev
 
 Now to draw it up. Capturing the utterance `ad_174o2o8a` again, we will draw it:
 
-`
+```
+cat 1.ph.txt.fsts| awk "199<NR && NR<1246" | \
+    fstcompile --osymbols=data/lang/phones.txt --keep_osymbols | \
+    fstproject --project_output | \
+    fstrmepsilon | fstdeterminize | fstminimize  | \
+    fstdraw --portrait --acceptor | dot -Tsvg > 1.ph.svg
+```
+
+So the steps being again, grabing the lines we want, compling it.
+Projecting it (this time on the output space),
+removing espilons, determining, and minimising to make it more readable.
+Then drawing it.
+
+![phone lattice](./174o2o8aPhones.png)
+
 
 
 
