@@ -258,7 +258,7 @@ Consider the lattice gzipped at `exp/mono0a/decode/lat.1.gz`
 Running:
 ```
 lattice-to-fst --lm-scale=10 "ark:gunzip -c exp/mono0a/decode/lat.1.gz|" ark,t:1.fsts
-utils/int2sym -f 3 data/lang/words.txt 1.fsts > 1.txt.fst
+utils/int2sym -f 3 data/lang/words.txt 1.fsts > 1.txt.fsts
 
 ```
 (Assuming that `/kaldi-trunk/src/latbin` is in your path)
@@ -271,22 +271,57 @@ The weights are the negitive log likelyhood of that transitor (or that final sta
 As shown below:
 
 ```
-bn_z5za 
-0 1 z 1 10.4514 
-1 2 5 7 2.02053 
-2 3 z 1 5.54633 
-3 4 o 2 5.74013 
-3 4.67521 
-4 2.61209 
-
-bn_za 
-0 1 z 1 6.73091 
-1 2 o 2 5.71098 
-1 4.62176 
+ad_16a 
+0 1 1 3 14.7788 
+1 2 6 8 5.0416 
 2 2.61209 
 
+ad_174o2o8a 
+0 1 1 3 12.5118 
+0 11 o 2 9.44585 
+1 2 7 9 9.34774 
+1 16 o 2 6.57278 
+2 3 4 6 2.08985 
+3 4 o 2 10.2191 
+4 5 2 4 4.91992 
+4 9 o 2 3.20784 
+5 6 o 2 3.84306 
+6 7 o 2 3.90951 
+6 13 8 10 7.07031 
+7 8 8 10 6.74935 
+7 14 o 2 3.79537 
+8 2.61209 
+9 10 2 4 5.3914 
+10 6 o 2 3.84306 
+11 12 1 3 4.75861 
+12 2 7 9 9.34774 
+13 2.61209 
+14 15 8 10 6.63099 
+15 2.61209 
+16 17 7 9 6.38392 
+17 3 4 6 2.08985 
+```
+
+Then we grab one particular FST off of it. (in this case just  using Awk to grab some lines -- most sophisticated approaches exist). Compile it. 
+Project it only along the input labels (cos they are the words it will guess at), Minimise the number of states to get a simpler but equivelent model (easier to read) and finally draw it as an FSA.
 
 ```
+cat 1.txt.fst | awk "6<NR && NR<30" |\
+    fstcompile --isymbols=data/lang/words.txt --keep_isymbols| \ 
+    fstproject | fstminimize| \ 
+    fstdraw --portrait --acceptor | dot -Tsvg > 1.2.svg
+```
+
+The Result of this, being a FSA that will accept (/generate) the likely matchs for the utterance `ad_174o2o8a`. 
+The utterance actually said "174o2o8", wich is accepted by the path through states "0,2,4,5,6,8,9,12"
+
+Note: that when the confidance in the path being correct is very high no weight is shown.
+
+![parse lattice](./174o2o8a.png)
+
+Notice that the latice has alot of paths allowing 'o' to be followed by another 'o'.
+
+
 
 
 
