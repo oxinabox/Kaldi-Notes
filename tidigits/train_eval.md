@@ -258,32 +258,34 @@ Consider the lattice gzipped at `exp/mono0a/decode/lat.1.gz`
 Running:
 ```
 lattice-to-fst --lm-scale=10 "ark:gunzip -c exp/mono0a/decode/lat.1.gz|" ark,t:1.fsts
+utils/int2sym -f 3 data/lang/words.txt 1.fsts > 1.txt.fst
+
 ```
 (Assuming that `/kaldi-trunk/src/latbin` is in your path)
 
 Will fill `1.fsts` with a collection of text form fsts, one for each utterance space seperated.
 Ones with multiple terminal states have multiple different "reasonably likely" phrases possible.
-The Labels on the transitions do not directly reflect anything (to my knowledge).
+The output labels on the transitions are words (Which we restored using int2sym).
 The weights are the negitive log likelyhood of that transitor (or that final state)
 
 As shown below:
 
 ```
-ad_1a 
-0       1       3       3       93.153
-0       2       2       2       67.6587
-1       26.1209
-2       3       3       3       69.482
-3       26.1209
+bn_z5za 
+0 1 z 1 10.4514 
+1 2 5 7 2.02053 
+2 3 z 1 5.54633 
+3 4 o 2 5.74013 
+3 4.67521 
+4 2.61209 
 
-ad_1b 
-0       1       3       3       121.179
-0       2       2       2       80.3047
-0       4       11      11      116.976
-1       26.1209
-2       3       3       3       77.4011
-3       26.1209
-4       26.1209
+bn_za 
+0 1 z 1 6.73091 
+1 2 o 2 5.71098 
+1 4.62176 
+2 2.61209 
+
+
 ```
 
 

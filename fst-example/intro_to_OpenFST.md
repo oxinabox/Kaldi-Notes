@@ -61,8 +61,8 @@ As per the orginal, but with a weight assiciated with each edge (as well as inpu
 This weight has a ⊕ and ⊗  operation defined on it,
 so that weight of alternitives and that cumulitive weight along a path can be found.
 
- -- eg weight along a path is prouct of probabilities, and represents the probability of that input string.
- -- eg sum of weights on two edges is the probaility of either of those alternitives.
+ - eg weight along a path is prouct of probabilities, and represents the probability of that input string.
+ - eg sum of weights on two edges is the probaility of either of those alternitives.
 
 
 
