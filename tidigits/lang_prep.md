@@ -75,6 +75,20 @@ Each line of the Lexicon file has the format:
 
 ie one word followed by its phonene make up, specified with space delimited symbols.
 
+####The Lexicon for TIDIGITS:
+```
+ z iy r ow
+ o ow
+ 1 w ah n
+ 2 t uw
+ 3 th r iy
+ 4 f ao r
+ 5 f ay v
+ 6 s ih k s
+ 7 s eh v ah n
+ 8 ey t
+ 9 n ay n
+```
 
 ### Converting Lexicon to lexicon.fst.txt: `util/make_lexicon_fst.pl`
 The Full break-down of how to use it (which will be output if no arguements are passed to it):

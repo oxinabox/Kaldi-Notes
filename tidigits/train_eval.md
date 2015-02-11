@@ -201,7 +201,7 @@ steps/decode.sh [options] <graph-dir> <test-data-dir> <decode-dir>
  - `decode-dir` is a path to store all of its outputs -- including the results of the evaluations. It will be created if it does not exist.
 
 ###Configuration / Options 
-The `decode.sh` script takes many configuration options, this should be familar from the `train_mono.sh` script options above.
+The `decode.sh` script takes many configuration options, these should be familar from the `train_mono.sh` script options above.
 They can be set by passing them as flags to script: as so: `--<option-name> <value>`.
 Or by putting them all into a config bash script, and adding the flag `--config <path>`.
 They could also be set by editting the defaults in `steps/decode.sh`, but there is no good reason to do this.
@@ -231,10 +231,61 @@ Options passed on to `kaldi-trunk/src/gmmbin/gmm-latgen-faster`:
 
 
 ###Lattices
-[This blog post](http://codingandlearning.blogspot.com.au/search/label/KWS14) gives an introduction to the Latices in Kaldi quiet well.
- Quoting from it:
+From the [Kaldi documentation]( http://kaldi.sourceforge.net/lattices.html) "A lattice is a representation of the alternative word-sequences that are "sufficiently likely" for a particular utterance."
 
- >To decode an utterance with T frames, the WFST interpretation is as follows. We construct an accepter, or WFSA (WFST with the same input and output symbol for all the arcs). It has T+1 states, with an arc for each cobmination of (time, context-dependent HMM state). The costs on there arcs correspond to negated and scaled acoustic log-likelihood. Call this acceptor U, then the complete search space is:
- S= U * HCLG, where * represents the composition operation and HCLG is the decoding graph generated for Kaldi. HCLG integrates the HMM transition, context expansion, lexicon and most importantly the language model. In composition, the weights are added together. As they are negated log-likelihoods, it is effectively multiplying the original probabilities
+[This blog post](http://codingandlearning.blogspot.com.au/search/label/KWS14) gives an introduction to the Latices in Kaldi quiet well, relating them to the other FSTs.
 
+Kaldi outputs these during the decoding step, into 
+However, interpretting them can be hard, because all the commandline programs for working with them use [Kaldi's special table IO](http://kaldi.sourceforge.net/io_tut.html), describing how this works in detail is beyound the scope of this introduction.
+The commandline programs in question can be found in `/kaldi-trunk/src/latbibin`.
+
+
+The Latices are output during the decoding into `<decode-dir>`. Into a numbered gzipped file. eg `lat.10.gz`. Don't bother unzipping them -- the internal files are binary also.
+Each of these archieves containes many latices - one for each utterance.
+
+Commands to work with them take the general form of:
+
+```
+<latice-command> [options] "ark:gunzip -c <path to lat.N.gz>|" ark,t:<outputpath>
+
+```
+Each of the latice commands do take the `--help` option which will cause them to give the other options.
+
+####Example Conveting a latice to a FST Diagram
+For example,
+Consider the lattice gzipped at `exp/mono0a/decode/lat.1.gz`
+
+Running:
+```
+lattice-to-fst --lm-scale=10 "ark:gunzip -c exp/mono0a/decode/lat.1.gz|" ark,t:1.fsts
+```
+(Assuming that `/kaldi-trunk/src/latbin` is in your path)
+
+Will fill `1.fsts` with a collection of text form fsts,
+one for each utterance space seperated.
+However the labels (input and output are same as FSA), are not preserved in the text.
+
+As shown below:
+
+```
+ad_1a 
+0       1       3       3       93.153
+0       2       2       2       67.6587
+1       26.1209
+2       3       3       3       69.482
+3       26.1209
+
+ad_1b 
+0       1       3       3       121.179
+0       2       2       2       80.3047
+0       4       11      11      116.976
+1       26.1209
+2       3       3       3       77.4011
+3       26.1209
+4       26.1209
+```
+
+
+
+##Reading Results
 
