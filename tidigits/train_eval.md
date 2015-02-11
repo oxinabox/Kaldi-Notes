@@ -358,7 +358,8 @@ Projecting it (this time on the output space),
 removing espilons, determining, and minimising to make it more readable.
 Then drawing it.
 
-![phone lattice](./174o2o8aPhones.png)
+(Click to view full screen image)
+[![phone lattice](./174o2o8aPhones.png)](./174o2o8aPhones.png)
 
 
 
