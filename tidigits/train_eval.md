@@ -256,11 +256,13 @@ For example,
 Consider the lattice gzipped at `exp/mono0a/decode/lat.1.gz`
 
 Running:
+
 ```
 lattice-to-fst --lm-scale=10 "ark:gunzip -c exp/mono0a/decode/lat.1.gz|" ark,t:1.fsts
 utils/int2sym -f 3 data/lang/words.txt 1.fsts > 1.txt.fsts
 
 ```
+
 (Assuming that `/kaldi-trunk/src/latbin` is in your path)
 
 Will fill `1.fsts` with a collection of text form fsts, one for each utterance space seperated.
