@@ -237,7 +237,7 @@ From the [Kaldi documentation]( http://kaldi.sourceforge.net/lattices.html) "A l
 
 Kaldi outputs these during the decoding step, into 
 However, interpretting them can be hard, because all the commandline programs for working with them use [Kaldi's special table IO](http://kaldi.sourceforge.net/io_tut.html), describing how this works in detail is beyound the scope of this introduction.
-The commandline programs in question can be found in `/kaldi-trunk/src/latbibin`.
+The commandline programs in question can be found in `/kaldi-trunk/src/latbibin`
 
 
 The Latices are output during the decoding into `<decode-dir>`. Into a numbered gzipped file. eg `lat.10.gz`. Don't bother unzipping them -- the internal files are binary also.
@@ -261,9 +261,10 @@ lattice-to-fst --lm-scale=10 "ark:gunzip -c exp/mono0a/decode/lat.1.gz|" ark,t:1
 ```
 (Assuming that `/kaldi-trunk/src/latbin` is in your path)
 
-Will fill `1.fsts` with a collection of text form fsts,
-one for each utterance space seperated.
-However the labels (input and output are same as FSA), are not preserved in the text.
+Will fill `1.fsts` with a collection of text form fsts, one for each utterance space seperated.
+Ones with multiple terminal states have multiple different "reasonably likely" phrases possible.
+The Labels on the transitions do not directly reflect anything (to my knowledge).
+The weights are the negitive log likelyhood of that transitor (or that final state)
 
 As shown below:
 

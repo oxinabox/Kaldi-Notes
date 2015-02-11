@@ -3,7 +3,9 @@
 layout: default
 title: Installing Kaldi
 ---
- - Following instructions at: http://kaldi.sourceforge.net/tutorial_setup.html
+
+##Building Kaldi
+- Following instructions at: http://kaldi.sourceforge.net/tutorial_setup.html
 
  - first `cd` to `kaldi-trunk/tools` then do a `make -j 8` to build to tools kaldi uses
     - Issue: Requires Libtool
@@ -19,12 +21,35 @@ title: Installing Kaldi
                 - in particular for getting the dependancies
             - When it comes to running configure use: `../gcc-4.9.2/configure --prefix=$LOCAL_INSTALL --disable-multilib`
             - when doing use `make -j 8` or it will take a very long time to build
-                - Resolution2: install from backports
+        - Resolution2: install from backports
 
+##Installing  Graph Viewer
 
- - That will do to have Kaldi working. You likely will want to add some of the binary directories to your path.
-      - Add to your .bashrc (or similar) `PATH="<...>/kaldi-trunk/tools/openfst/bin:${PATH}"`, where `<...>` is the math to the kaldi-trunk folder.
+For viewing the output of fstdraw, you need to convert it into a useful format. To do this you need `dot` wich is part of graphviz. `apt-get install graphvis`
 
- - For viewing the output of fstdraw, you need to convert it into a useful format. To do this you need `dot` wich is part of graphviz. `apt-get install graphvis`
+##Adding things to your path
+Since Kaldi has not been install to any location -- just built in place.
+Nothing is on your path.
+
+The build process, spreads out all the binerys into a number of folders in `\kaldi-trunk\src/*bin`,
+intermixing them with the source files. (so you can't just add the bin files to your path).
+
+You might like to symlink all excutables into one folder and add it to your path.
+The symlinking can be done with the following shell script:
+
+```
+for a in  `find . -type f -executable -print`;
+do
+ln -s $a bins
+done
+```
+This will put them all into the bins directory.
+Then you can edit your `.bashrc` file to add that to your path.
+Eg:
+
+```
+PATH="/user/data7/20361362/kaldi/kaldi-trunk/src/bins:${PATH}"
+```
+
 
 
