@@ -229,13 +229,12 @@ Options passed on to `kaldi-trunk/src/gmmbin/gmm-latgen-faster`:
 
 
 
-
 ###Lattices
 From the [Kaldi documentation]( http://kaldi.sourceforge.net/lattices.html) "A lattice is a representation of the alternative word-sequences that are "sufficiently likely" for a particular utterance."
 
 [This blog post](http://codingandlearning.blogspot.com.au/search/label/KWS14) gives an introduction to the Latices in Kaldi quiet well, relating them to the other FSTs.
 
-Kaldi outputs these during the decoding step, into 
+Kaldi creates and uses these latices during the decoding step.
 However, interpretting them can be hard, because all the commandline programs for working with them use [Kaldi's special table IO](http://kaldi.sourceforge.net/io_tut.html), describing how this works in detail is beyound the scope of this introduction.
 The commandline programs in question can be found in `/kaldi-trunk/src/latbibin`
 
@@ -363,7 +362,23 @@ Then drawing it.
 
 
 
+Viewing Results
+Also during te decoding step the results are recorded.
 
+The  can be found in `<decode-dir>` under filenames called  `wer_<N>` where `N` is a number
 
-##Reading Results
+Example:
+
+```
+compute-wer --text --mode=present ark:data/test/text ark,p:-
+%WER 1.63 [ 670 / 41220, 420 ins, 111 del, 139 sub ]
+%SER 4.70 [ 590 / 12547 ]
+Scored 12547 sentences, 0 not present in hyp.
+```
+
+The wikipedia entry on [Word Error Rate (WER)](https://en.wikipedia.org/wiki/Word_error_rate), is a reasonable introduction, if you are not familar with it.
+
+The Sentence Error Rate (SER), is actually the utterance error rate.
+Of all the unterances in the test set, it is the portion that had zero errors.
+Both error rates only consider the most likely hypothesis in the latice.
 
