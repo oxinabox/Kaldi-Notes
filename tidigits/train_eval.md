@@ -258,8 +258,8 @@ Consider the lattice gzipped at `exp/mono0a/decode/lat.1.gz`
 Running:
 
 ```
-lattice-to-fst --lm-scale=10 "ark:gunzip -c exp/mono0a/decode/lat.1.gz|" ark,t:1.fsts
-utils/int2sym -f 3 data/lang/words.txt 1.fsts > 1.txt.fsts
+lattice-to-fst "ark:gunzip -c exp/mono0a/decode/lat.1.gz|" ark,t:1.fsts
+utils/int2sym.pl -f 3 data/lang/words.txt 1.fsts > 1.txt.fsts
 
 ```
 
@@ -308,7 +308,7 @@ Then we grab one particular FST off of it. (in this case just  using Awk to grab
 Project it only along the input labels (cos they are the words it will guess at), Minimise the number of states to get a simpler but equivelent model (easier to read) and finally draw it as an FSA.
 
 ```
-cat 1.txt.fst | awk "6<NR && NR<30" |\
+cat 1.txt.fsts | awk "6<NR && NR<30" |\
     fstcompile --isymbols=data/lang/words.txt --keep_isymbols| \ 
     fstproject | fstminimize| \ 
     fstdraw --portrait --acceptor | dot -Tsvg > 1.2.svg
@@ -323,6 +323,30 @@ Note: that when the confidance in the path being correct is very high no weight 
 
 Notice that the latice has alot of paths allowing 'o' to be followed by another 'o'.
 
+#### Drawing Phone Lattices
+Much like we can draw lattices at the word level,
+we can go down to draw them at the phone level.
+
+
+```
+lattice-to-phone-lattice exp/mono0a/final.mdl "ark:gunzip -c exp/mono0a/decode/lat.1.gz|" ark,t:1.ph.lats
+lattice-copy --write-compact=false ark:1.ph.lats ark,t:1.ph.fsts
+utils/int2sym.pl -f 4 data/lang/phones.txt 1.ph.fsts > 1.ph.txt.fsts
+cat 1.ph.txt.fsts | awk 'BEGIN{FS = " "}{ if (NF>=4) {print $1," ", $2," ",$3," ",$4;} else {print $1;};}' > 1.ph.txt.fsts
+
+```
+
+Notice that in the first step the model (final.mdl)  was also used.
+The output of the first step is in the Compact Latice form which is not ammniable to being worked with by scripts like int2sym.
+The secondset expands it, making it a FST.
+Third step is simply subsituting the phone symbols into the output. It is worth looking perhaps at 1.ph.txt.fsts, notices that the weights are only at start word phones. It is also however hard to read as it have hundred of empty string states ('<eps>'). Notice also there are 2 weights (this is the Graph Weight and the Accustic Weight). 
+As there are 2 weights, this is not in a valid format for OpenFST. Thus the four line (the Awk Script) removed them all.
+
+With that done we now have something that looks like a collection txt.fst, however it is still increbly willed with epsilon states.
+
+Now to draw it up. Capturing the utterance `ad_174o2o8a` again, we will draw it:
+
+`
 
 
 
