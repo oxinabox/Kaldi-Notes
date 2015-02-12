@@ -1,7 +1,4 @@
-- text: Home
-  url: /
-- text: First menu
-  url: /first-menu/
+- url: /first-menu/resources
   subitems:
     - text: First menu (sub)
       url: /first-menu/first-menu-sub/

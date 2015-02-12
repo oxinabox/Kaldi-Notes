@@ -4,9 +4,9 @@
     <li>
         <a href="{{ item.url }}">
             {% if item.url == navurl %}
-                <b>{{ item.text }}</b>
+                <b>{{ page.title }}</b>
             {% else %}
-                {{ item.text }}
+                {{ page.title }}
             {% endif %}
         </a>
     </li>
