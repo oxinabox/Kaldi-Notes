@@ -116,6 +116,7 @@ header h2 {
   padding-right: 20px;
   text-shadow: none;
   border-width: 1px 1px 1px 0px;
+  border-style: solid;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   

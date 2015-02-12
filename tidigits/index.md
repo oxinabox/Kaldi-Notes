@@ -35,13 +35,12 @@ There are Three Steps to applying Kaldi to a task such as this.
  2. [Language Preparation](./lang_prep):
     * Create Lexicon (Phoneme/Word dictionary)
     * Create Grammer (Word Language Model)
-    
  3. [Training Speach Recogniser](train):
+    * Training the GMMs
+    * Building the HMM graph
  4. [Evaluating the Speach Recogniser](eval):
-    * This is the only step that is actually done in Kali proper, rather than by helper scripts and tools.
-    * Viewing the results is also nontrivial
-    * Kaldi does not store results in the most clear way,
-
+    * Decodinging and building the lattices
+    * Interpetting the results
 The full process can be carried out by running `bash run.sh`. Though you most likly need to edit at least the TIDIGITs path, and the `cmd.sh` (so that it is set to run locally, not on a cluster).
 
 
