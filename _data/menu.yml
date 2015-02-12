@@ -2,6 +2,5 @@
   url: /resources
 - text: Required Knowledge
   url: /required_knowledge
-  subitems:
-    - text: Second menu (sub)
-      url: /second-menu/second-menu-sub/
+- text: Installing Kaldi
+  url: /install_notes 
