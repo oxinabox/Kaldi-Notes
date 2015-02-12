@@ -113,8 +113,9 @@ header h2 {
   color: #D5000D;
   padding-top: 20px;
   padding-bottom: 20px;
+  padding-right: 20px;
   text-shadow: none;
-  border: 2px solid;
+  border-width: 1px 1px 1px 0px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   
