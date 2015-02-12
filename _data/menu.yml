@@ -6,3 +6,13 @@
   url: /install_notes
 - text: OpenFST
   url: /intro_to_OpenFST
+
+- text: TIDIGITS
+  url: /tidigits
+  subitems:
+    - text: Data Preparation
+      url: /data_prep
+    - text: Language Preparation
+      url: /lang_prep
+
+
