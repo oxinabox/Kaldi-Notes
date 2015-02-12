@@ -27,6 +27,7 @@ is triggered by the script `run.sh`
 ## Feature Extraction
 
 ###Extracting the MFCC Features
+See [this section of the kaldi tuitorial](http://kaldi.sourceforge.net/tutorial_running.html#tutorial_running_feats)
 
 [Mel-frequency cepstral coefficient](http://en.wikipedia.org/wiki/Mel-frequency_cepstrum)  (MFCCs) features.
 Done using the script `steps/make_mfcc.sh`
