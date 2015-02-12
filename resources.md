@@ -3,9 +3,7 @@ layout: default
 title: Other Resources
 ---
 #Other Reasources
-This document is quiet interlinked to other resources, as approprate for each section and subsection.
-The most core links, and a few others are summerised below.
-
+This document is quiet interlinked to other resources, as approprate for each section and subsection. These and some futher resources are summerised below.
 
 ##OpenFST
 
