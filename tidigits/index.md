@@ -4,9 +4,9 @@ title: How To Train TIDIGITS
 ---
 
 #Introduction
-TIDigits is a comparatively simple connected digits recognition task.
-Like many well-known corpia, Kaldi includes a example script for it.
-It is fairly typical for the example scripts.
+TIDIGITS is a comparatively simple connected digits recognition task.
+Like for many well-known corpia, Kaldi includes a example script for it.
+It is fairly typical for the example scripts -- though simpler than most.
 
 The example script can be foung in `kaldi-trunk/egs/tidigits/s5/` all other scripts refered to here are relitive to that path. Kaldi example scripts are all written to be run from that path (or it equivelent in other examples) even if they are located in a subfolder.
 Kaldi example scripts should only be run in `bash` -- they will not nescisarily work in other POSIX shells.
