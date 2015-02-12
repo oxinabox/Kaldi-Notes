@@ -11,8 +11,8 @@
   url: /tidigits
   subitems:
     - text: Data Preparation
-      url: /data_prep
+      url: /tidigits/data_prep
     - text: Language Preparation
-      url: /lang_prep
-
-
+      url: /tidigits/lang_prep
+    - text: Training
+      url: /tidigits/train
