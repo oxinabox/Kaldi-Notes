@@ -20,9 +20,8 @@ The most core links, and a few others are summerised below.
 ##Kaldi
 
  - [Kaldi Documentation](http://kaldi.sourceforge.net/)
-	- Tuitorial](http://kaldi.sourceforge.net/tutorial.html) 
+	- [Tuitorial](http://kaldi.sourceforge.net/tutorial.html) 
  - [This Masters Thesis](https://github.com/oplatek/kaldi-thesis/blob/master/text/tags/oplatek_thesis013.pdf?raw=true)
-
  - Several pages by Vassil Panayotov
 	- [This blog post on Graph construction](http://vpanayotov.blogspot.com.au/2012/06/kaldi-decoding-graph-construction.html) 
 	- [These instructions on recipe setup](http://vpanayotov.blogspot.com.au/2012/02/poor-mans-kaldi-recipe-setup.html)
