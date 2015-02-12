@@ -16,3 +16,5 @@
       url: /tidigits/lang_prep
     - text: Training
       url: /tidigits/train
+    - text: Evaluation
+      url: /tidigits/eval
