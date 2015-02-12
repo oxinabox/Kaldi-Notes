@@ -5,7 +5,7 @@
 - text: Installing Kaldi
   url: /install_notes
 - text: OpenFST
-url: /fst-example
+  url: /fst-example
 
 - text: TIDIGITS
   url: /tidigits
