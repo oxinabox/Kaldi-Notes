@@ -9,10 +9,10 @@
 		{{ item.text }}
 	    {% endif %}
 	</a>
-    </li>
     {% if item.subitems %}
 	{% include nav.html nav=item.subitems %}
     {% endif %}
+    </li>
 {% endfor %}
 </ul>
 
