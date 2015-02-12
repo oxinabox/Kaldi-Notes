@@ -108,6 +108,7 @@ header h2 {
 #nav {
   float: left;
   position: fixed;
+  top: 50%;
 }
 
 
