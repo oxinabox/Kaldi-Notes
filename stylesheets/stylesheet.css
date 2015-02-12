@@ -111,7 +111,9 @@ header h2 {
   top: 50%;
   background-color: #6D6D6D;
   color: #D5000D;
-  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
 
 }
 
