@@ -3,4 +3,6 @@
 - text: Required Knowledge
   url: /required_knowledge
 - text: Installing Kaldi
-  url: /install_notes 
+  url: /install_notes
+- text: OpenFST
+  url: /intro_to_OpenFST
