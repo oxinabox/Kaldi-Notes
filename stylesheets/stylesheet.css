@@ -105,6 +105,11 @@ header h2 {
   margin-bottom: 40px;
 }
 
+#nav {
+  float: left;
+}
+
+
 a.button {
   display: block;
   float: left;
