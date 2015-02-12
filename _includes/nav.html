@@ -1,12 +1,11 @@
 {% assign navurl = page.url | remove: 'index.html' %}
 <ul>
-{% for item in include.nav %}
     <li>
         <a href="{{ item.url }}">
             {% if item.url == navurl %}
-                <b>{{ page.title }}</b>
+                <b>{{ item.text }}</b>
             {% else %}
-                {{ page.title }}
+                {{ item.text }}
             {% endif %}
         </a>
     </li>

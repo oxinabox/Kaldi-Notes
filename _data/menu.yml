@@ -1,12 +1,7 @@
-- url: /first-menu/resources
-  subitems:
-    - text: First menu (sub)
-      url: /first-menu/first-menu-sub/
-      subitems:
-        - text: First menu (sub-sub)
-          url: /first-menu/first-menu-sub/first-menu-sub-sub/
-- text: Second menu
-  url: /second-menu/
+- text: Other Resources
+  url: /resources
+- text: Required Knowledge
+  url: /required_knowledge
   subitems:
     - text: Second menu (sub)
       url: /second-menu/second-menu-sub/
