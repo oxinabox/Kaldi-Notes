@@ -9,7 +9,7 @@ The most core links, and a few others are summerised below.
 
 ##OpenFST
 
-- [OpenFST Documentation](http://www.openfst.org/twiki/bin/view/FST/WebHome)
+ - [OpenFST Documentation](http://www.openfst.org/twiki/bin/view/FST/WebHome)
     - [Quick Tour](http://www.openfst.org/twiki/bin/view/FST/FstQuickTour)
     - [Examples](http://www.openfst.org/twiki/bin/view/FST/FstExamples)
  - [Tuitorial Sheet from University of Illinois](http://www.isle.illinois.edu/sst/courses/minicourses/2009/lecture6.pdf)
