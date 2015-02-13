@@ -38,7 +38,7 @@ They could also be set by editting the defaults in `steps/decode.sh`, but there 
  * `scoring-opts` options to local/score.sh. Can be used to set min and max Language Model Weight for rescoring to be done. (default: "")
  * `num-threads` number of threads to use, (default 1).
  *  `parallel-opts <opts>` option string to be supplied to the parallel executer (in our running locally case `utils/run.pl`
-	 *e.g. '-pe smp 4' if you supply `--num-threads 4`
+	 * e.g. '-pe smp 4' if you supply `--num-threads 4`
  * `stage`: This is used to allow you to skip some steps, as above. However decode only has 2 stages. If stage is greater than 0 will skip decoding and just do scoring. (default `0`)
 
 Options passed on to `kaldi-trunk/src/gmmbin/gmm-latgen-faster`:
