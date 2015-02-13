@@ -3,7 +3,7 @@ layout: default
 title: How To Train TIDIGITS
 ---
 
-#Introduction
+#Introduction to training TIDIGITS
 TIDIGITS is a comparatively simple connected digits recognition task.
 Like for many well-known corpia, Kaldi includes a example script for it.
 It is fairly typical for the example scripts -- though simpler than most.
@@ -23,9 +23,9 @@ is a symlink to the matching folders in the WSJ example. You can very well make 
  - [This tuitorial](http://analytcz.com/kaldi-hybrid-mlphmm-asr-2/) seems good. Its webhosting does not seem stable, right now the [google cached version can be used](http://webcache.googleusercontent.com/search?q=cache:z-MGlCv917sJ:analytcz.com/kaldi-hybrid-mlphmm-asr-2/)
 
 
-##The Three Major Steps
+##The Major Steps
 
-There are Three Steps to applying Kaldi to a task such as this.
+There are Four Steps to applying Kaldi to a task such as this.
 
 
  1. [Data Preparation](./data_prep):

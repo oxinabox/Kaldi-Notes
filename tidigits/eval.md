@@ -2,6 +2,8 @@
 layout: default
 title:  Evaluation
 ---
+#Evalutation -- using the model to recognise speach.
+
 ##Decoding
 
 Decoding of th Graph is done using `steps/decode.sh`.
@@ -57,7 +59,7 @@ However, interpretting them can be hard, because all the commandline programs fo
 The commandline programs in question can be found in `/kaldi-trunk/src/latbibin`
 
 
-The Latices are output during the decoding into `<decode-dir>`. Into a numbered gzipped file. eg `lat.10.gz`. Don't bother unzipping them -- the internal files are binary also.
+The Latices are output during the decoding into `<decode-dir>`. Into a numbered gzipped file. eg `lat.10.gz`. The number corrisponds to the Job number (because the data has been distributed to multiple processes). Each contains a single binery file.
 Each of these archieves containes many latices - one for each utterance.
 
 Commands to work with them take the general form of:

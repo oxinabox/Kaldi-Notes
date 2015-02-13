@@ -4,6 +4,8 @@ layout: default
 title: Installing Kaldi
 ---
 
+#Installing Kaldi
+
 ##Building Kaldi
 - Following instructions at: http://kaldi.sourceforge.net/tutorial_setup.html
 

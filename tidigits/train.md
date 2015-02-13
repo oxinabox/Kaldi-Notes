@@ -3,7 +3,7 @@ layout: default
 title: Training
 ---
 
-####Controlled remote vs local excution: `cmd.sh`
+##Controlled remote vs local excution: `cmd.sh`
 Kaldi is designed to work with SunGrid clusters.
 It also work with other clusters.
 We want to run it locally, it can do that too.
@@ -13,16 +13,16 @@ This can be done by making sure cmd.sh sets the variables as follows:
 export train_cmd=run.pl
 export decode_cmd=run.pl
 ```
+
 rather than making references to `queue.pl`.
 
+Training (and testing), will still be split into multiple jobs, each handling different subsets of the data.
 
 
 #Training/Evaluating Recogniser
+This section is covered by [this section of the kaldi tuitorial](http://kaldi.sourceforge.net/tutorial_running.html#tutorial_running_monophone).
 
-The majority of what is done covered by this page, 
-is triggered by the script `run.sh`
-
-
+The majority of the steps covered in this page, are triggered by the script `run.sh`
 
 ## Feature Extraction
 
@@ -31,6 +31,8 @@ See [this section of the kaldi tuitorial](http://kaldi.sourceforge.net/tutorial_
 
 [Mel-frequency cepstral coefficient](http://en.wikipedia.org/wiki/Mel-frequency_cepstrum)  (MFCCs) features.
 Done using the script `steps/make_mfcc.sh`
+
+
 
 ####Compute Cepstral Mean and Variance Normalization statistics
 Done using the script `steps/compute_cmvn_stats.sh`
