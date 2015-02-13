@@ -24,3 +24,5 @@ This document is quiet interlinked to other resources, as approprate for each se
     - [These instructions on recipe setup](http://vpanayotov.blogspot.com.au/2012/02/poor-mans-kaldi-recipe-setup.html)
         - [This tuitorial](http://analytcz.com/kaldi-hybrid-mlphmm-asr-2/) by the same author extends the above. But its webhosting does not seem stable, right now the [google cached version can be used](http://webcache.googleusercontent.com/search?q=cache:z-MGlCv917sJ:analytcz.com/kaldi-hybrid-mlphmm-asr-2/)
  - [This Masters Thesis](https://github.com/oplatek/kaldi-thesis/blob/master/text/tags/oplatek_thesis013.pdf?raw=true)
+ - [Lecture slides from National Taiwan Normal University](http://berlin.csie.ntnu.edu.tw/Courses/Speech%20Recognition/Lectures2013/SP2013F_Lecture14-Introduction%20to%20the%20Kaldi%20toolkit.pdf)
+ - [Lecture Slides from Dan Povey (one of kaldi's creators)](http://danielpovey.com/kaldi-lectures.html)
