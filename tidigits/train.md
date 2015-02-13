@@ -24,18 +24,6 @@ This section is covered by [this section of the kaldi tuitorial](http://kaldi.so
 
 The majority of the steps covered in this page, are triggered by the script `run.sh`
 
-## Feature Extraction
-
-###Extracting the MFCC Features
-See [this section of the kaldi tuitorial](http://kaldi.sourceforge.net/tutorial_running.html#tutorial_running_feats)
-
-[Mel-frequency cepstral coefficient](http://en.wikipedia.org/wiki/Mel-frequency_cepstrum)  (MFCCs) features.
-Done using the script `steps/make_mfcc.sh`
-
-
-
-####Compute Cepstral Mean and Variance Normalization statistics
-Done using the script `steps/compute_cmvn_stats.sh`
 
 ##Training
 Done using the script `steps/train_mono.sh`, However very similar steps are used in the other training scripts from in `steps` (such as `steps/train_deltas`).
@@ -133,7 +121,8 @@ Again call that with the `--help` option for more info.
 Finally, increase the number of Gaussians (capped by `max_iter_inc`), so that by the time all the iterations (`num_iters`) are all complete, it will approach the target total number of gaussians (`totgauss`) -- assuming `max_iter_inc` did not block it.
 
 
-##Making of the Graph
+##Making of the Decoding Graph
+
 
 As showing earlier, the Grammer (G) can be composed with the Lexicon (L),
 to get a phoneme to word mapping.

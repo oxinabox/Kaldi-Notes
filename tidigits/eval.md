@@ -5,8 +5,8 @@ title:  Evaluation
 #Evalutation -- using the model to recognise speach.
 
 ##Decoding
-
-Decoding of th Graph is done using `steps/decode.sh`.
+We already created a decoding graph in the [training step](training).
+Using this graph to decode the utterances  is done using `steps/decode.sh`.
 This script only works only for certain feature types -- conviently all the feature types we use in TIDIGITS. (Similar decoding functions also exist in steps, for other feature types)
 
 ###Usage for `steps/decode.sh`
@@ -37,7 +37,8 @@ They could also be set by editting the defaults in `steps/decode.sh`, but there 
  * `transform-dir` directory path to find fMLLR transforms (Not useful for TIDIGITS). (default: N/A only used if fMLLR transformed were done on features.)
  * `scoring-opts` options to local/score.sh. Can be used to set min and max Language Model Weight for rescoring to be done. (default: "")
  * `num-threads` number of threads to use, (default 1).
- *  --parallel-opts <opts>                           # e.g. '-pe smp 4' if you supply --num-threads 4
+ *  `parallel-opts <opts>` option string to be supplied to the parallel executer (in our running locally case `utils/run.pl`
+	 *e.g. '-pe smp 4' if you supply `--num-threads 4`
  * `stage`: This is used to allow you to skip some steps, as above. However decode only has 2 stages. If stage is greater than 0 will skip decoding and just do scoring. (default `0`)
 
 Options passed on to `kaldi-trunk/src/gmmbin/gmm-latgen-faster`:
@@ -47,6 +48,11 @@ Options passed on to `kaldi-trunk/src/gmmbin/gmm-latgen-faster`:
  * `beam` decoding beam (default 13.0)
  * `lattice_beam` latice generation beam (default 6.0)
 
+
+###What is the parallism of Jobs in the Decoding step
+During decoding, the test set can be (and is in the example) split up (the actual spitting ws doing in the [data prepartion step](data_prep)),
+and each different process (Job), decodes different setset of utterances, into lattices (see below).
+When scoring happens (see below), all the different lattices are evaluated to get the transcriptions.
 
 
 ###Lattices
@@ -181,11 +187,12 @@ Then drawing it.
 [![phone lattice](./174o2o8aPhones.png)](./174o2o8aPhones.png)
 
 
+##Scoring
+###Viewing Results
+As the final step of `steps/decoding.sh` the results are recorded.
 
-Viewing Results
-Also during te decoding step the results are recorded.
+The  can be found in `<decode-dir>` under filenames called  `wer_<N>` where `N` is the Language Model Scale.
 
-The  can be found in `<decode-dir>` under filenames called  `wer_<N>` where `N` is a number
 
 Example:
 
@@ -201,4 +208,21 @@ The wikipedia entry on [Word Error Rate (WER)](https://en.wikipedia.org/wiki/Wor
 The Sentence Error Rate (SER), is actually the utterance error rate.
 Of all the unterances in the test set, it is the portion that had zero errors.
 Both error rates only consider the most likely hypothesis in the latice.
+
+`utils/best_wer.pl` will take as input any number of the `wer_<N>` files,
+and will outout the best WER from amoungst them.
+
+###How scoring is done
+Scoring is done by `local/score.sh`.
+this program takes a `--min-lmwt`, `--max-lmwt` for the minimul and maximum language model weight.
+It outputs the `wer_N` files for each of this different weights.
+The Language Model Weight, is  the trade off (vs the Accutic model weight) as to which is more important, matching the language model, or matching the sounds.
+
+The scoring program works by opening all the latice files,
+and getting them to output a transcription of the best guess at the words in all of the utterances they contain. The best guess is done with `<kalid-trunk>/src/latticebin/lattice-best-path`
+the language model weight is passed to it, as `-lm-scale`.
+
+
+The WER is calcuated using `<kalid-trunk>/src/bin/computer-wer`,
+which takes two transcription files -- the best guess output in the previous step, and the correct labels. The program outputs the portion that match.
 
