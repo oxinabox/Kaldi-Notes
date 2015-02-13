@@ -1,3 +1,7 @@
 baseurl: /Kaldi-Notes
 
 markdown: redcarpet
+
+redcarpet:
+  extensions: [smart]
+

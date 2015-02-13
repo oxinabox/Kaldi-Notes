@@ -3,10 +3,6 @@ layout: default
 title: Introduction to OpenFST
 ---
 
-![A FST for TIDIGITS](../tidigits/lexiconFST.png)
-
-Above: An FST for pronouncing the digits 1-9 and two pronouncations of zero as:  O(o) and zero (z), as used in TIDIGITS
-
 
 #Introduction to Finite State Transducers
 Weighted Finite State Transducers is a generalisations of finite state machines.
@@ -15,7 +11,12 @@ They can be used for many purposed, including implementing algorithms that are h
 ##Other places to get information
  - A descent set of slides can be found [here](http://www.gavo.t.u-tokyo.ac.jp/~novakj/wfst-algorithms.pdf)
  - [The OpenFst documentation](http://www.openfst.org/twiki/bin/view/FST/FstQuickTour) and [FST Examples](http://www.openfst.org/twiki/bin/view/FST/FstExamples) are  nonaweful, though the shell  and C++ sections are intermixed.
- - [Speech Recognition with Weighted Finite-state Transducers](http://www.cs.nyu.edu/~mohri/pub/hbka.pdf) a book chapter.     
+ - [Speech Recognition with Weighted Finite-state Transducers](http://www.cs.nyu.edu/~mohri/pub/hbka.pdf) a book chapter.
+
+![A FST for TIDIGITS](../tidigits/lexiconFST.png)
+
+Above: An FST for pronouncing the digits 1-9 and two pronouncations of zero as:  O(o) and zero (z), as used in TIDIGITS
+
 
 ##Terminology
 ###Symbols and Strings
