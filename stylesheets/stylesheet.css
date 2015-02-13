@@ -122,6 +122,14 @@ header h2 {
   
 }
 
+.navtop {
+  font-weight: bold;
+}
+
+
+.navsub{
+  font-weight: normal;
+}
 
 
 a.button {

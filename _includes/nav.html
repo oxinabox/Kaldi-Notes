@@ -2,15 +2,17 @@
 <ul>
 {% for item in include.nav %}
     {% if item.subitems %}
- 	<li>
-        <a href="{{ site.baseurl }}{{ item.url }}" class="navtop navparent" >
+	<li class="navtop navparent" >
+        <a href="{{ site.baseurl }}{{ item.url }}">
 		{{ item.text }}
 		</a>
 		<ul>
 		{% for subitem in item.subitems %}
-			 <a href="{{ site.baseurl }}{{ subitem.url }}" class="navsub" >
-			{{ subitem.text }}
-			</a>
+            <li class="navsub">
+    			 <a href="{{ site.baseurl }}{{ subitem.url }}" >
+	    		{{ subitem.text }}
+		    	</a>
+            </li>
 
 		{% endfor %}
 		</ul>
@@ -18,11 +20,12 @@
 	</li>
 
     {% else %}
-  	<li>
+	<li class="navtop" >
+        <a href="{{ site.baseurl }}{{ item.url }}">
          <a href="{{ site.baseurl }}{{ item.url }}" class="navtop" >
 		{{ item.text }}
 		</a>
- 	</li>	
+	</li>	
 	{% endif %}
  
 
