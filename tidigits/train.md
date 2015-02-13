@@ -60,6 +60,11 @@ THey could also be set by editting the defaults in `steps/train_mono.sh`, but th
  * `cmvn_opts`  options will be passed on to cmvn -- like scale_opts. (default `""`)
  * `stage`: This is used to allow you to skip some steps, if the program crashed partway though. The stage variable sets the stage to start at. The stages are discussed in the next section (default `-4`)
 
+
+###What is the parallism of Jobs in the Training step
+During training, the training set can be (and is in the example) split up (the actual spitting is explained in the [data prepartion step](data_prep)),
+and each different process (Job), trains on a different subset of utterances, which each iteration are then merged.
+
 ### Initialisation Stages
 
 ####Initialise GMM (Stage -3)
@@ -116,6 +121,11 @@ Call that with the `--help` option for more info.
 Then redo the GMM-based acoustic model.
 This is done with  `/kaldi-trunk/src/gmmbin/gmm-est`, but using very different arguments.
 Again call that with the `--help` option for more info.
+
+###Merge GMMs
+All the different GMMs from the partioned training dataset are then merged,
+using `gmm-acc-sum` to produce a model (a `.mdl` file).
+The model can be examined using `/kaldi-trunk/src/gmmbin/gmm-info` to get some very basic information about the number of Gaussians etc.
 
 
 Finally, increase the number of Gaussians (capped by `max_iter_inc`), so that by the time all the iterations (`num_iters`) are all complete, it will approach the target total number of gaussians (`totgauss`) -- assuming `max_iter_inc` did not block it.
