@@ -6,70 +6,70 @@ title: Introduction to OpenFST
 
 #Introduction to Finite State Transducers
 Weighted Finite State Transducers is a generalisations of finite state machines.
-They can be used for many purposed, including implementing algorithms that are hard to write out otherwise -- such as HMMs, as well as for the representation of knowledge -- similar to a grammer.
+They can be used for many purposed, including implementing algorithms that are hard to write out otherwise -- such as HMMs, as well as for the representation of knowledge -- similar to a grammar.
 
 ##Other places to get information
  - A descent set of slides can be found [here](http://www.gavo.t.u-tokyo.ac.jp/~novakj/wfst-algorithms.pdf)
- - [The OpenFst documentation](http://www.openfst.org/twiki/bin/view/FST/FstQuickTour) and [FST Examples](http://www.openfst.org/twiki/bin/view/FST/FstExamples) are  nonaweful, though the shell  and C++ sections are intermixed.
+ - [The OpenFst documentation](http://www.openfst.org/twiki/bin/view/FST/FstQuickTour) and [FST Examples](http://www.openfst.org/twiki/bin/view/FST/FstExamples) are  nonawful, though the shell  and C++ sections are intermixed.
  - [Speech Recognition with Weighted Finite-state Transducers](http://www.cs.nyu.edu/~mohri/pub/hbka.pdf) a book chapter.
 
 ![A FST for TIDIGITS](../tidigits/lexiconFST.png)
 
-Above: An FST for pronouncing the digits 1-9 and two pronouncations of zero as:  O(o) and zero (z), as used in TIDIGITS
+Above: An FST for pronouncing the digits 1-9 and two pronouncations of zero as:  O (o) and zero (z), as used in TIDIGITS
 
 
 ##Terminology
 ###Symbols and Strings
 Symbols come from some alphabet.
-They could be letters, words, phomemes, etc.
+They could be letters, words, phonemes, etc.
 
 A string is a series of symbols from an alphabet, it can include the empty string.
 Matching the examples above, a string could be a word (spelt out), a sentence, a word (spelt out phonetically), etc.
 
-A string can be represented as a Finite State Acceptor, where each symbol links to the a state which links to the next.
+A string can be represented as a Finite State Acceptor, where each symbol links to the state which links to the next.
 
 ###Finite State Acceptor (FSA)
-A Finite State Acceptor has the componants of: 
+A Finite State Acceptor has the components of: 
 
  - a number of States 
      - one or more of which is initial
      - one or more of which is terminal
- - connections between states, with a input symbol (ie label)
-     - the symbol could be the empty string (often writen "-" or "<eps>" or "ε")
-     - Not nescisarily a one to one label to next state mapping (ie nondetermatistic)
+ - connections between states, with a input symbol (IE label)
+     - the symbol could be the empty string (often written "-" or "<eps>" or "ε")
+     - Not necessarily a one to one label to next state mapping (IE nondeterministic)
 
-A FSA can be used to check if a string matches its patern -- it is computationally equivelent to a regular expression. 
+A FSA can be used to check if a string matches its pattern -- it is computationally equivalent to a regular expression. 
 It can also be used to generate strings which match that pattern.
 
-FSA&apos;s can be treated as FSTs with same input and output symbols at each edge.
+FSA's can be treated as FSTs with same input and output symbols at each edge.
 Kaldi example scripts sometimes write them this way.
 
 ###Finite State Transducers (FST)
-A Finite State Transducer extends the Finite State Acceptor wih the addition of:
+A Finite State Transducer extends the Finite State Acceptor with the addition of:
 
  - output labels on each edge
    - again the output can be the empty string.
      - it is common (such as in the TIDIGIT example above), to see only the first transition in a nonbranching substructure to be labels -- the other states have nothing to add other than confirming we are in that chain. (which we might Not be)
      - The input alphabet and output alphabet do not have to be the same, and indeed are normally not.
 
-A FST can be used to translate strings in its input alphabet to strings in its output alphabet, iff the input string matches the FSTs structure of allowed transistions.
+A FST can be used to translate strings in its input alphabet to strings in its output alphabet, iff the input string matches the FSTs structure of allowed transitions.
 Thus if a FSA accepting its input alphabet is composed with it, it can translate the FSA.
 A series of FSAs can be composed, translating (matched) alphabet to alphabet, to get the desired output.
 
 
 ###Weighted Finite State Acceptor/Transducer
-As per the orginal, but with a weight assiciated with each edge (as well as input, and output for transducers)
+As per the ordinal, but with a weight associated with each edge (as well as input, and output for transducers)
 This weight has a ⊕ and ⊗  operation defined on it,
-so that weight of alternitives and that cumulitive weight along a path can be found.
+so that weight of alternatives and that cumulative weight along a path can be found.
 
- - eg weight along a path is prouct of probabilities, and represents the probability of that input string.
- - eg sum of weights on two edges is the probaility of either of those alternitives.
+ - e.g. weight along a path is product of probabilities, and represents the probability of that input string.
+ - e.g. sum of weights on two edges is the probability of either of those alternitives.
 
 
 
-#Finite State Transnducers in Kaldi
+#Finite State Transducers in Kaldi
 
-Kaldi uses FSTs (and FSAs), as a common knowledge repressentation for all things.
+Kaldi uses FSTs (and FSAs), as a common knowledge representation for all things.
 
 
 #OpenFST
@@ -80,7 +80,7 @@ Kaldi uses FSTs (and FSAs), as a common knowledge repressentation for all things
 Textual Representation of the finite state transducer or finite state acceptor respectively.
 These are the files you write to get things done, to describe your system.
 
-In most of kaldi the `.fst.txt`/`.fsa.txt` is used. In other places it is just called `.txt`. In this document, it is always refered to by the former terms.
+In most of kaldi the `.fst.txt`/`.fsa.txt` is used. In other places it is just called `.txt`. In this document, it is always referred to by the former terms.
 
 
 #### Line format:
@@ -140,8 +140,8 @@ fstcommand [FLAGS] [inputfile [outputfile]]
 Which is to say an `inputfile` can optionally be provided,
 and if it is, then optionally an `outputfile` can be provided also.
 
-If either is missing then input will be taken from standard in (ie piped in, or read from keyboard if no inputpipe),
-and output will be sent to standard output (ie piped out, or printed to the terminal if there is no output pipe.), repectively.
+If either is missing then input will be taken from standard in (IE piped in, or read from keyboard if no inputpipe),
+and output will be sent to standard output (IE piped out, or printed to the terminal if there is no output pipe.), repectively.
 
 
 ####Accessing Help (manpages)
@@ -244,7 +244,7 @@ A  very simple Finite State Accepter.
 A dictionary containing several words. There is only state in the dictionary -- as far it its concerns words can be in any order
 
 ##[sent.fsa.txt](./sent.fsa.txt)
-A grammer for a simple sentence, expessed as a finite state acceptor.
+A grammar for a simple sentence, expessed as a finite state acceptor.
 Sentences can either be `determiner noun verb` or `determiner noun verb determiner noun`.
 
 
