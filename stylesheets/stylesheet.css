@@ -122,6 +122,10 @@ header h2 {
   
 }
 
+#nav > li {
+  display: inline;
+}
+
 
 a.button {
   display: block;
