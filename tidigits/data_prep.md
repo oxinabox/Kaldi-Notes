@@ -4,15 +4,15 @@ title: Data Preparation
 ---
 
 #Data Preparation
-[The offical kaldi documentation on this section](http://kaldi.sourceforge.net/data_prep.html#data_prep_data). It is the basis of alot of this section.
+[The official kaldi documentation on this section](http://kaldi.sourceforge.net/data_prep.html#data_prep_data). It is the basis of a lot of this section.
 
 These steps are carried out by the script `local/tidigits_data_prep.sh`. It takes one parameter -- the path to the dataset.
 
-One should realise after looking at this section (and the next), just how valuable AWK and Bash (or equivelents) are for this task.
+One should realize after looking at this section (and the next), just how valuable AWK and Bash (or equivalents) are for this task.
 
 
 ##Locate the Dataset 
-on on the SIP network, the TIDIGITs data set can be found at `/user/data14/res/speech_data/tidigits/`. Symlink it into a convient location.
+on on the SIP network, the TIDIGITs data set can be found at `/user/data14/res/speech_data/TIDIGITs/`. Symlink it into a convenient location.
 
 ###Split the Dataset into test and training
 TIDIGITS is already split into test and training datasets.
@@ -21,7 +21,7 @@ It could be done at any time during the data preparation step,
 depending on when other useful informations (from the annotations),
 is available.
 
-##Parse its anonotations
+##Parse its annotations
 Annotations of the correct labels for each utterance need to be generated for the `test` and `training` directories.
 
 ###Kaldi Script: `.scp`: Basically just a list of Utterances to Filenames
@@ -35,38 +35,38 @@ Line Format:
 
 ####Recording ID
 The recording ID is the first part of each line in a  `.scp` file.
-If speaker id is available (which is is for tidigits), it should form the first part of the recording id.
+If speaker id is available (which is is for TIDIGITs), it should form the first part of the recording id.
 Kaldi requires this not for speaker identification, but for purposes of sorting for training (`utt2spk` is for that).
 
-The remained of the speaker ID is arbairy, so long as it is unique.
-For convience of generating the unique id, the example script for TIDIGITS uses
+The remained of the Speaker ID is arbitary, so long as it is unique.
+For convenience of generating the unique id, the example script for TIDIGITS uses
 `<speaker-id>_<transcription><sessionid>`.
 
-As there is only one Utterance per recording in TIDIGITS, the Recording ID is the Utterannce ID.
+As there is only one Utterance per recording in TIDIGITS, the Recording ID is the Utterance ID.
 (See below)
 
 
 ####Extended Filename
 The second part of the line is the extended filename
-Extended Filename is the term used by Kaldi,  to refer ot a string that is either the path to a wav-format file or it is a bash command that will output wav-format data to standard out, followed by a pipe symbol (`|`).
+Extended Filename is the term used by Kaldi,  to refer to a string that is either the path to a wav-format file or it is a bash command that will output wav-format data to standard out, followed by a pipe symbol (`|`).
 
 As the TIDIGITS data is in the [SPHERE audio format](http://www.ee.columbia.edu/ln/LabROSA/doc/HTKBook21/node64.html), it needs to be converted to wav.
 So the sample scripts in Kaldi use `sph2pipe` to convert them, so the .scp files lines will look like: (assuming `sph2pipe` is on your PATH, otherwise Path to the executable will need to be used)
 
 ```
-ad_16a sph2pipe -f wav ../tidigits/test/girl/ad/16a.wav |
+ad_16a sph2pipe -f wav ../TIDIGITs/test/girl/ad/16a.wav |
 ```
 
 ###Segmentation File `segments`
-If there were multiple utterances per recording then there would need to be a segementation file as well, mapping RecordingIDs and Start-End times to Utterance IDs.
-(See [The offical kaldi documentation on this section](http://kaldi.sourceforge.net/data_prep.html#data_prep_data)).
+If there were multiple utterances per recording then there would need to be a segmentation file as well, mapping Recording Ids and Start-End times to Utterance IDs.
+(See [The official kaldi documentation on this section](http://kaldi.sourceforge.net/data_prep.html#data_prep_data)).
 As there is not, by not creating a `segments` file, Kaldi defaults to utterance id == recording id.
 
 
 ###Text Transcription file `text`
 The text transcription must be stored in a file, which the example calls `text`.
-each line is an utterance-id followed by a transcription of what is said. 
-Eg:
+Each line is an utterance-id followed by a transcription of what is said. 
+E.g.:
 
 ```
 ad_1oa 1 o
@@ -75,7 +75,7 @@ ad_1z6a 1 z 6
 ad_23461a 2 3 4 6 1
 ```
 
-Notice the Utterance-ID format as descibed above.
+Notice the Utterance-ID format as described above.
 Notice also, for later, that the transcription here is in word space, not phoneme space.
 
 ###Utterance to Speaker Mappings `utt2spk`
@@ -91,7 +91,7 @@ The feature extraction is carried out by the `run.sh` script, rather than by the
 
 
 ###Extracting the MFCC Features
-See [this section of the kaldi tuitorial](http://kaldi.sourceforge.net/tutorial_running.html#tutorial_running_feats)
+See [this section of the kaldi tutorial](http://kaldi.sourceforge.net/tutorial_running.html#tutorial_running_feats)
 
 [Mel-frequency cepstral coefficient](http://en.wikipedia.org/wiki/Mel-frequency_cepstrum)  (MFCCs) features.
 Done using the script `steps/make_mfcc.sh`

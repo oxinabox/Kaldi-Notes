@@ -58,5 +58,5 @@ Python rarely shows up in the example scripts for kaldi, but it does show up.
 When it does, it is doing a task similar to those perl is used for.
 It is worth knowing, and using, as it is not a good idea to unleash more perl scripts into the wild.
 Combining in tools like [Plumbum](https://pypi.python.org/pypi/plumbum), it could also be used to replace Bash -- this however is less portable.
-Other tools like [pyp](http://code.google.com/p/pyp/), can be used to replace Awk -- again loseing portability.
+Other tools like [pyp](http://code.google.com/p/pyp/), can be used to replace Awk -- again losing portability.
 
