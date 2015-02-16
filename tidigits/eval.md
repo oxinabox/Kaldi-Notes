@@ -2,37 +2,38 @@
 layout: default
 title:  Evaluation
 ---
-#Evalutation -- using the model to recognise speach.
+#Evaluation -- using the model to recognise speech.
 
 ##Decoding
 We already created a decoding graph in the [training step](training).
 Using this graph to decode the utterances  is done using `steps/decode.sh`.
-This script only works only for certain feature types -- conviently all the feature types we use in TIDIGITS. (Similar decoding functions also exist in steps, for other feature types)
+This script only works only for certain feature types -- conveniently all the feature types we use in TIDIGITS. (Similar decoding functions also exist in steps, for other feature types)
 
 ###Usage for `steps/decode.sh`
 
 Usage:
+
 ```
 steps/decode.sh [options] <graph-dir> <test-data-dir> <decode-dir>
 ```
 
- - `test-data-dir` is the path to the training data directory [prepaired earlier](./data_prep)
- - `graph-dir` is the path the the directory containing the graphs generated in the previous step
+ - `test-data-dir` is the path to the training data directory [prepared earlier](./data_prep)
+ - `graph-dir` is the path to the directory containing the graphs generated in the previous step
  - `decode-dir` is a path to store all of its outputs -- including the results of the evaluations. It will be created if it does not exist.
 
 ###Configuration / Options 
-The `decode.sh` script takes many configuration options, these should be familar from the `train_mono.sh` script options above.
+The `decode.sh` script takes many configuration options, these should be familiar from the `train_mono.sh` script options above.
 They can be set by passing them as flags to script: as so: `--<option-name> <value>`.
 Or by putting them all into a config bash script, and adding the flag `--config <path>`.
-They could also be set by editting the defaults in `steps/decode.sh`, but there is no good reason to do this.
+They could also be set by editing the defaults in `steps/decode.sh`, but there is no good reason to do this.
 
 
- * `nj`: Number of Jobs to run in parrellel. (default `4`) 
+ * `nj`: Number of Jobs to run in parallel. (default `4`) 
  * `cmd`:  Job dispatcher script  (default `run.pl`)
 
 
  * `iter`: Iteration of model to test. Training step above actually stores a copy of the model for each iteration. This option can be used to go back and test that (default final trained model). Overridden by `model` option.
- * `model`: which model to use, given by path. If given this overides the `iter` (default determined by valure of `iter`)
+ * `model`: which model to use, given by path. If given this overrides the `iter` (default determined by value of `iter`)
  
  * `transform-dir` directory path to find fMLLR transforms (Not useful for TIDIGITS). (default: N/A only used if fMLLR transformed were done on features.)
  * `scoring-opts` options to local/score.sh. Can be used to set min and max Language Model Weight for rescoring to be done. (default: "")
@@ -43,15 +44,15 @@ They could also be set by editting the defaults in `steps/decode.sh`, but there 
 
 Options passed on to `kaldi-trunk/src/gmmbin/gmm-latgen-faster`:
 
- * `acwt` acoustic scale applied to accoustic likelyhoods applied in lattice generation (default 0.083333). It affects the pruning of the latice (low enough likelyhood will be pruned).
+ * `acwt` acoustic scale applied to acoustic likelihoods applied in lattice generation (default 0.083333). It affects the pruning of the lattice (low enough likelihood will be pruned).
  * `max_active` (default 7000)
  * `beam` decoding beam (default 13.0)
- * `lattice_beam` latice generation beam (default 6.0)
+ * `lattice_beam` lattice generation beam (default 6.0)
 
 
-###What is the parallism of Jobs in the Decoding step
-During decoding, the test set can be (and is in the example) split up (the actual spitting ws doing in the [data prepartion step](data_prep)),
-and each different process (Job), decodes different setset of utterances, into lattices (see below).
+]##What is the parallelism of Jobs in the Decoding step
+During decoding, the test set can be (and is in the example) split up (the actual spitting was doing in the [data preparation step](data_prep)),
+and each different process (Job), decodes different subset of utterances, into lattices (see below).
 When scoring happens (see below), all the different lattices are evaluated to get the transcriptions.
 
 
@@ -61,22 +62,22 @@ From the [Kaldi documentation]( http://kaldi.sourceforge.net/lattices.html) "A l
 [This blog post](http://codingandlearning.blogspot.com.au/search/label/KWS14) gives an introduction to the Latices in Kaldi quiet well, relating them to the other FSTs.
 
 Kaldi creates and uses these latices during the decoding step.
-However, interpretting them can be hard, because all the commandline programs for working with them use [Kaldi's special table IO](http://kaldi.sourceforge.net/io_tut.html), describing how this works in detail is beyound the scope of this introduction.
-The commandline programs in question can be found in `/kaldi-trunk/src/latbibin`
+However, interpreting them can be hard, because all the command line programs for working with them use [Kaldi's special table IO](http://kaldi.sourceforge.net/io_tut.html), describing how this works in detail is beyond the scope of this introduction.
+The command line programs in question can be found in `/kaldi-trunk/src/latbibin`
 
 
-The Latices are output during the decoding into `<decode-dir>`. Into a numbered gzipped file. eg `lat.10.gz`. The number corrisponds to the Job number (because the data has been distributed to multiple processes). Each contains a single binery file.
-Each of these archieves containes many latices - one for each utterance.
+The Latices are output during the decoding into `<decode-dir>`. Into a numbered gzipped file. E.g. `lat.10.gz`. The number corresponds to the Job number (because the data has been distributed to multiple processes). Each contains a single binary file.
+Each of these achieves contains many latices - one for each utterance.
 
 Commands to work with them take the general form of:
 
 ```
-<latice-command> [options] "ark:gunzip -c <path to lat.N.gz>|" ark,t:<outputpath>
+<lattice-command> [options] "ark:gunzip -c <path to lat.N.gz>|" ark,t:<outputpath>
 
 ```
-Each of the latice commands do take the `--help` option which will cause them to give the other options.
+Each of the lattice commands do take the `--help` option which will cause them to give the other options.
 
-####Example Conveting a latice to a FST Diagram
+###Example Converting a lattice to a FST Diagram
 For example,
 Consider the lattice gzipped at `exp/mono0a/decode/lat.1.gz`
 
@@ -90,10 +91,10 @@ utils/int2sym.pl -f 3 data/lang/words.txt 1.fsts > 1.txt.fsts
 
 (Assuming that `/kaldi-trunk/src/latbin` is in your path)
 
-Will fill `1.fsts` with a collection of text form fsts, one for each utterance space seperated.
+Will fill `1.fsts` with a collection of text form FSTs, one for each utterance space separated.
 Ones with multiple terminal states have multiple different "reasonably likely" phrases possible.
 The output labels on the transitions are words (Which we restored using int2sym).
-The weights are the negitive log likelyhood of that transitor (or that final state)
+The weights are the negative log likelihood of that transition (or that final state)
 
 As shown below:
 
@@ -139,14 +140,14 @@ cat 1.txt.fsts | awk "6<NR && NR<30" |\
     fstdraw --portrait --acceptor | dot -Tsvg > 1.2.svg
 ```
 
-The Result of this, being a FSA that will accept (/generate) the likely matchs for the utterance `ad_174o2o8a`. 
-The utterance actually said "174o2o8", wich is accepted by the path through states "0,2,4,5,6,8,9,12"
+The Result of this, being a FSA that will accept (/generate) the likely matches for the utterance `ad_174o2o8a`. 
+The utterance actually said "174o2o8", which is accepted by the path through states "0,2,4,5,6,8,9,12"
 
-Note: that when the confidance in the path being correct is very high no weight is shown.
+Note: that when the confidence in the path being correct is very high no weight is shown.
 
 ![parse lattice](./174o2o8a.png)
 
-Notice that the latice has alot of paths allowing 'o' to be followed by another 'o'.
+Notice that the lattice has a lot of paths allowing 'o' to be followed by another 'o'.
 
 #### Drawing Phone Lattices
 Much like we can draw lattices at the word level,
@@ -160,13 +161,13 @@ utils/int2sym.pl -f 4 data/lang/phones.txt 1.ph.fsts > 1.ph.txt.wfsts
 cat 1.ph.txt.wfsts | awk 'BEGIN{FS = " "}{ if (NF>=4) {print $1," ", $2," ",$3," ",$4;} else {print $1;};}' > 1.ph.txt.fsts
 ```
 
-Notice that in the first step the model (final.mdl)  was also used.
-The output of the first step is in the Compact Latice form which is not ammniable to being worked with by scripts like int2sym.
-The secondset expands it, making it a FST.
-Third step is simply subsituting the phone symbols into the output. It is worth looking perhaps at 1.ph.txt.fsts, notices that the weights are only at start word phones. It is also however hard to read as it have hundred of empty string states ('<eps>'). Notice also there are 2 weights (this is the Graph Weight and the Accustic Weight). 
+Notice that in the first step the model (`final.mdl`)  was also used.
+The output of the first step is in the Compact Lattice form which is not amenable to being worked with by scripts like int2sym.
+The second set expands it, making it a FST.
+Third step is simply substituting the phone symbols into the output. It is worth looking perhaps at `1.ph.txt.fsts`, notices that the weights are only at start word phones. It is also however hard to read as it have hundred of empty string states ('<eps>'). Notice also there are 2 weights (this is the Graph Weight and the Acoustic Weight). 
 As there are 2 weights, this is not in a valid format for OpenFST. Thus the four line (the Awk Script) removed them all.
 
-With that done we now have something that looks like a collection txt.fst, however it is still increbly willed with epsilon states.
+With that done we now have something that looks like a collection txt.fst, however it is still very filled with epsilon states.
 
 Now to draw it up. Capturing the utterance `ad_174o2o8a` again, we will draw it:
 
@@ -178,9 +179,9 @@ cat 1.ph.txt.fsts| awk "199<NR && NR<1246" | \
     fstdraw --portrait --acceptor | dot -Tsvg > 1.ph.svg
 ```
 
-So the steps being again, grabing the lines we want, compling it.
+So the steps being again, grabbing the lines we want, compiling it.
 Projecting it (this time on the output space),
-removing espilons, determining, and minimising to make it more readable.
+removing epsilons (matchers for empty strings), determining, and minimising to make it more readable.
 Then drawing it.
 
 (Click to view full screen image)
@@ -203,26 +204,26 @@ compute-wer --text --mode=present ark:data/test/text ark,p:-
 Scored 12547 sentences, 0 not present in hyp.
 ```
 
-The wikipedia entry on [Word Error Rate (WER)](https://en.wikipedia.org/wiki/Word_error_rate), is a reasonable introduction, if you are not familar with it.
+The Wikipedia entry on [Word Error Rate (WER)](https://en.wikipedia.org/wiki/Word_error_rate), is a reasonable introduction, if you are not familiar with it.
 
 The Sentence Error Rate (SER), is actually the utterance error rate.
-Of all the unterances in the test set, it is the portion that had zero errors.
-Both error rates only consider the most likely hypothesis in the latice.
+Of all the utterances in the test set, it is the portion that had zero errors.
+Both error rates only consider the most likely hypothesis in the lattice.
 
 `utils/best_wer.pl` will take as input any number of the `wer_<N>` files,
-and will outout the best WER from amoungst them.
+and will output the best WER from amongst them.
 
 ###How scoring is done
 Scoring is done by `local/score.sh`.
-this program takes a `--min-lmwt`, `--max-lmwt` for the minimul and maximum language model weight.
+his program takes a `--min-lmwt`, `--max-lmwt` for the minimal and maximum language model weight.
 It outputs the `wer_N` files for each of this different weights.
-The Language Model Weight, is  the trade off (vs the Accutic model weight) as to which is more important, matching the language model, or matching the sounds.
+The Language Model Weight, is  the trade off (vs the Arctic model weight) as to which is more important, matching the language model, or matching the sounds.
 
-The scoring program works by opening all the latice files,
+The scoring program works by opening all the lattice files,
 and getting them to output a transcription of the best guess at the words in all of the utterances they contain. The best guess is done with `<kalid-trunk>/src/latticebin/lattice-best-path`
 the language model weight is passed to it, as `-lm-scale`.
 
 
-The WER is calcuated using `<kalid-trunk>/src/bin/computer-wer`,
+The WER is calculated using `<kalid-trunk>/src/bin/computer-wer`,
 which takes two transcription files -- the best guess output in the previous step, and the correct labels. The program outputs the portion that match.
 

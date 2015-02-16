@@ -3,7 +3,7 @@ layout: default
 title: Training
 ---
 
-##Controlled remote vs local excution: `cmd.sh`
+##Controlled remote vs local execution: `cmd.sh`
 Kaldi is designed to work with SunGrid clusters.
 It also work with other clusters.
 We want to run it locally, it can do that too.
@@ -19,8 +19,8 @@ rather than making references to `queue.pl`.
 Training (and testing), will still be split into multiple jobs, each handling different subsets of the data.
 
 
-#Training/Evaluating Recogniser
-This section is covered by [this section of the kaldi tuitorial](http://kaldi.sourceforge.net/tutorial_running.html#tutorial_running_monophone).
+#Training/Evaluating Recognizer
+This section is covered by [this section of the kaldi tutorial](http://kaldi.sourceforge.net/tutorial_running.html#tutorial_running_monophone).
 
 The majority of the steps covered in this page, are triggered by the script `run.sh`
 
@@ -33,36 +33,36 @@ Usage:
 ```
 steps/train_mono.sh [options] <training-data-dir> <lang-dir> <exp-dir>"
 ```
- - `training-data-dir` is the path to the training data directory [prepaired earlier](./data_prep)
- - `lang-dir` is the path the the directory containing all the language model files, [also prepared earlier](./lang_prep)
+ - `training-data-dir` is the path to the training data directory [prepared earlier](./data_prep)
+ - `lang-dir` is the path the directory containing all the language model files, [also prepared earlier](./lang_prep)
  - `exp-dir` is a path for the training to store all of its outputs. It will be created if it does not exist.
 
 ###Configuration / Options 
 The `train_mono` script takes many configuration options.
 They can be set by passing them as flags to script: as so: `--<option-name> <value>`.
-Or by putting them all into a config bash script, and adding the flag `--config <path>`.
-THey could also be set by editting the defaults in `steps/train_mono.sh`, but there is no good reason to do this.
+Or by putting them all into  a config bash script, and adding the flag `--config <path>`.
+They could also be set by editing the defaults in `steps/train_mono.sh`, but there is no good reason to do this.
 
 
- * `nj`: Number of Jobs to run in parrellel. (default `4`) 
+ * `nj`: Number of Jobs to run in parallel. (default `4`) 
  * `cmd`:  Job dispatcher script  (default `run.pl`)
  * `scale_opts`: takes a string (wrap it in quotes) to control scaling options (default `"--transition-scale=1.0 --acoustic-scale=0.1 --self-loop-scale=0.1"`)
  	* `transition-scale` (default `1.0`)
 	* `acoustic-scale` (default `0.1`)
 	* `self-loop-scale` (default `0.1`)
  * `num_iters` Number of iterations of training (default `40`)
- * `max_iter_inc`  Last iter to increase number of Gaussians on (default `30`)
- * `totgauss` Target number of Gaussians (detault `1000`)
- *  `careful` passed on to gmm-align-compiled. To quote its documention: "If true, do 'careful' alignment, which is better at detecting alignment failure (involves loop to start of decoding graph)." (default `false`)
+ * `max_iter_inc`  maximum amount to increase the number of Gaussians by (default `30`)
+ * `totgauss` Target number of Gaussians (default `1000`)
+ *  `careful` passed on to `gmm-align-compiled`. To quote its documentation: "If true, do 'careful' alignment, which is better at detecting alignment failure (involves loop to start of decoding graph)." (default `false`)
  * `boost_silence` Factor by which to boost silence likelihoods in alignment. (Default `1.0`)
  *  `realign_iters` iterations in which to perform realignment (default `"1 2 3 4 5 6 7 8 9 10 12 14 16 18 20 23 26 29 32 35 38"`)
- * `power`  exponent to determine number of gaussians from occurrence counts (detault `0.25`)
+ * `power`  exponent to determine number of Gaussians from occurrence counts (default `0.25`)
  * `cmvn_opts`  options will be passed on to cmvn -- like scale_opts. (default `""`)
  * `stage`: This is used to allow you to skip some steps, if the program crashed partway though. The stage variable sets the stage to start at. The stages are discussed in the next section (default `-4`)
 
 
-###What is the parallism of Jobs in the Training step
-During training, the training set can be (and is in the example) split up (the actual spitting is explained in the [data prepartion step](data_prep)),
+###What is the parallelism of Jobs in the Training step
+During training, the training set can be (and is in the example) split up (the actual spitting is explained in the [data preparation step](data_prep)),
 and each different process (Job), trains on a different subset of utterances, which each iteration are then merged.
 
 ### Initialisation Stages
@@ -71,7 +71,7 @@ and each different process (Job), trains on a different subset of utterances, wh
 Uses `/kaldi-trunk/src/gmmbin/gmm-init-mono`.
 Call that with the `--help` option for more info
 
-This defines (amoung other things), how many GMMs there are initially.
+This defines (amongst other things), how many GMMs there are initially.
 
 
 ####Compile Training Graphs (Stage -2)
@@ -105,7 +105,7 @@ If this iteration is one of the `realign_iters` then:
 #####Boost Silence
 Silence is boosted using `/kaldi-trunk/src/gmmbin/gmm-boost-silence`,
 Call that with the `--help` option for more info.
-Notably it does not nesc boost the silence phone (but it does in this training case), it can boost any phone.
+Notably it does not necessarily  boost the silence phone (but it does in this training case), it can boost any phone.
 It does this by modifying the GMM weights, to make silence more probable.
 
 #####Align 
@@ -123,27 +123,28 @@ This is done with  `/kaldi-trunk/src/gmmbin/gmm-est`, but using very different a
 Again call that with the `--help` option for more info.
 
 ###Merge GMMs
-All the different GMMs from the partioned training dataset are then merged,
+All the different GMMs from the partitioned training dataset are then merged,
 using `gmm-acc-sum` to produce a model (a `.mdl` file).
 The model can be examined using `/kaldi-trunk/src/gmmbin/gmm-info` to get some very basic information about the number of Gaussians etc.
 
 
-Finally, increase the number of Gaussians (capped by `max_iter_inc`), so that by the time all the iterations (`num_iters`) are all complete, it will approach the target total number of gaussians (`totgauss`) -- assuming `max_iter_inc` did not block it.
+Finally, increase the number of Gaussians (capped by `max_iter_inc`), so that by the time all the iterations (`num_iters`) are all complete, it will approach the target total number of Gaussians (`totgauss`) -- assuming `max_iter_inc` did not block it.
 
 
 ##Making of the Decoding Graph
 
 
-As showing earlier, the Grammer (G) can be composed with the Lexicon (L),
+As showing earlier, the Grammar (G) can be composed with the Lexicon (L),
 to get a phoneme to word mapping.
 
 To increase the power of the phones, they could be expanded to add context.
 For example making the 'ay' phone in 'n-ay-n' (nine) different from the one in 'm-ay-n' (mine).
-This can be done with a Contrext dependancy FST, which can be scaled
+This can be done with a Context dependency FST, which can be scaled
 with the number of phones to take into account in the context.
-This is roughly equivelent to making use of n-grams on the phonetic level. Using 3 (ie one ot each side) context is refered to a triphones.
+This is roughly equivelent to making use of n-grams on the phonetic level. Using 3 (i.e. one to each side) context is referred to a triphones.
 
-The Context Dependency can be expressed as a FST, refered to as C.
+
+The Context Dependency can be expressed as a FST, referred to as C.
 
 
 
@@ -159,7 +160,7 @@ To quote the introduction to that script:
 > that has word-ids on the output, and pdf-ids on the input (these are indexes
 > that resolve to Gaussian Mixture Models).
 
-It also creates the afformentioned Context Dependency Graph.
+It also creates the aforementioned Context Dependency Graph.
 
 Usage: 
 
@@ -167,19 +168,19 @@ Usage:
 utils/mkgraph.sh [options] <lang-dir> <model-dir> <graphdir>
 ```
 
- - `lang-dir` is, as before, the path the the directory containing all the language model files, [also prepared earlier](./lang_prep)
+ - `lang-dir` is, as before, the path to the directory containing all the language model files, [also prepared earlier](./lang_prep)
  - `model-dir` is the `exp-dir` from the previous train-mono step, which now contained the trained model.
  - `graph-dir` is the directory to place the final graph in. In the example script this is made as a graph subdirectory under the `exp-dir`. If it does not exist, it will be created
 
  - 
 
 ####Context Options
-There are 3 options for defing how many phones are used to create the context.
-theres are pathsed as the options to the `utils/mkgraph.sh` script
+There are 3 options for defining how many phones are used to create the context.
+These are passed as the options to the `utils/mkgraph.sh` script
 
- - ` --mono` for monophone ie one phone ie no context (Used in `steps/train_mono.sh`)
- - no flag (default) for triphone ie 3 phones ie one phone ot each side for context
- - `--quinphone` for quinphone ie 5 phones ie 2 phones to each side for context
+ - ` --mono` for monophone i.e. one phone i.e. no context (Used in `steps/train_mono.sh`)
+ - no flag (default) for triphone i.e. 3 phones i.e. one phone to each side for context
+ - `--quinphone` for quinphone i.e. 5 phones i.e. 2 phones to each side for context
 
 It would not be hard to extend the mkgraph script to create contexts of any length.
 The section of the mkgraph script responsible for this,
