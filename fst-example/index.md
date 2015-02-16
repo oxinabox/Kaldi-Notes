@@ -97,9 +97,9 @@ OpenFst like to refer to symbols by a positive integer.
 Since any finite alphabet is isomorphic to a subset of the positive integers,
 such a bijection exists, and can be created by enumerating each symbol.
 
-For each FST you should have two of these files, one for the input alphabet and one for the output alphabet. For an FSA you should only have one -- for the input alphabet. Under most circumstances these can be generated from the `.fst.txt`/`.fsa.txt` programatically. One such script for that is provided here in [](./makeSymbols.py). Others exist thoughout the kaldi example scripts, often using AWK oneliners.
+For each FST you should have two of these files, one for the input alphabet and one for the output alphabet. For an FSA you should only have one -- for the input alphabet. Under most circumstances these can be generated from the `.fst.txt`/`.fsa.txt` programatically. One such script for that is provided here in [](./makeSymbols.py). Others exist throughout the kaldi example scripts, often using AWK oneliners.
 
-In different places different exentions are used.
+In different places different extensions are used.
 The example [](./compileAndDraw.sh) script uses `.isyms` for symbol files generated from the input alphabet in the textual FSA/FSA description, and `.osyms` for that generated from the output alphabet.
 
 
@@ -107,28 +107,28 @@ The example [](./compileAndDraw.sh) script uses `.isyms` for symbol files genera
 `symbol integer`
 
  - `symbol` is a symbol from the alphabet being maps
- - `integer` is a unique positive integer (that is to say each integer only apears once in this file).
+ - `integer` is a unique positive integer (that is to say each integer only appears once in this file).
 
 ### Binary FST/FSA: `.fst`, `.fsa`
 This is the binary representation of the finite state transducer/acceptor.
-It is produceced from the textual representation and symbol tables using
+It is produced from the textual representation and symbol tables using
 `fstcompile`.
 
 ### Graph of FST/FSA: `.dot`
-It is a [Graph Description Language File](http://en.wikipedia.org/wiki/DOT_%28graph_description_language%29), producted by `fstdraw`.
+It is a [Graph Description Language File](http://en.wikipedia.org/wiki/DOT_%28graph_description_language%29), produced by `fstdraw`.
 Piping in through `dot` can convert it into another more common format.
-Eg: `cat example.dot | dot -Tsvg > example.svg` will convert `example.dot` to a SVG file.
+E.g.: `cat example.dot | dot -Tsvg > example.svg` will convert `example.dot` to a SVG file.
 This is often done directly from the line that calls `fstdraw`.
 
-##OpenFST componants
-OpenFST is made up of several different commandline applications.
+##OpenFST components
+OpenFST is made up of several different command line applications.
 The three most used in kaldi are details briefly below:
 
 
 
 ###Common convention
 
-####Input and Output
+###Input and Output
 OpenFST commands which take a single input and produce a single output
 (such as `fstdraw` and `fstcompile`)
 have the basic usage of
@@ -140,13 +140,13 @@ fstcommand [FLAGS] [inputfile [outputfile]]
 Which is to say an `inputfile` can optionally be provided,
 and if it is, then optionally an `outputfile` can be provided also.
 
-If either is missing then input will be taken from standard in (IE piped in, or read from keyboard if no inputpipe),
-and output will be sent to standard output (IE piped out, or printed to the terminal if there is no output pipe.), repectively.
+If either is missing then input will be taken from standard in (IE piped in, or read from keyboard if no input pipe),
+and output will be sent to standard output (IE piped out, or printed to the terminal if there is no output pipe.), respectively.
 
 
 ####Accessing Help (manpages)
-Bacause OpenFST is not properly installed, it does not have entries in the man pages.
-to get help with a command use:
+Because OpenFST is not properly installed, it does not have entries in the man pages.
+To get help with a command use:
 
 ```
 fstcommand --help | less
@@ -161,7 +161,7 @@ Flags:
 
  - `--acceptor`: compiles it as an FSA, rather than a FST
  - `--isymbols=`, `--osymbols=`: specifies the input and output symbol tables
- - `--keep_isymbols`, `--keep_osymbols`: If set then the symbol stables as keeps in the binery file and do not need to be specified at later steps such as `fstdraw`
+ - `--keep_isymbols`, `--keep_osymbols`: If set then the symbol stables as keeps in the binary file and do not need to be specified at later steps such as `fstdraw`
 
 ###Draw: `fstdraw`
 produces a `.dot` file graph, from a binary FST/FSA
@@ -173,7 +173,7 @@ produces a `.dot` file graph, from a binary FST/FSA
 Flags:
 
  - `--portrait` this flag should **always** be set. If not set then image comes out rotated 90 degrees, and on a overly large canvas.
- - `--isymbols`, `--osymbols`, as before, but if not provided then symbols in the graphic will be replaced with their numeric repressentation, unless `--keep_isymbols` or `--keep_osymbols` was set in the compile step
+ - `--isymbols`, `--osymbols`, as before, but if not provided then symbols in the graphic will be replaced with their numeric representation, unless `--keep_isymbols` or `--keep_osymbols` was set in the compile step
  - `--acceptor`: draws a FSA, rather than a FST. Without it it will label the FSA with output labels.
 
 ###Compose: `fstcompose`
@@ -181,19 +181,19 @@ Composed a FSA/FST with a FST
 
  - Usage: `fstcompose [--fst_compat_symbols=false] outer.[fst|fsa] inner.fst output.fst` 
  
-Applying an input to the Output FST is equivelent to first applying it to the Inner then applying the output of that to the Outer. Ie `output(x)=outer(inner(x))`
+Applying an input to the Output FST is equivelent to first applying it to the Inner then applying the output of that to the Outer. i.e. `output(x)=outer(inner(x))`
  
- - `--fst_compat_symbols=false`: setting this to false (it defaults to true), may be required when composing FSTs/FSA where `--keep_isymbols` or `--keep_osymbols` was used and that the symbol files embeeded while actually compatable are not the same files (it seems to store the filenames, which can be seen by running `strings` on a fst).
+ - `--fst_compat_symbols=false`: setting this to false (it defaults to true), may be required when composing FSTs/FSA where `--keep_isymbols` or `--keep_osymbols` was used and that the symbol files embedded while actually compatible are not the same files (it seems to store the filenames, which can be seen by running `strings` on a fst).
 
 
 
 ###Other useful Commands
-All the commands in openfst have a use.
+All the commands in OpenFst have a use.
 Other commands which I have found particularly useful, 
 but do not have space to detail include;
 
  - `fstsymbols` manipulate and export the symbols tables in the binary FST/FSA 
- - `fstproject` convert the FST into a FSA in either the input or output space by discarding the appoprate lables
+ - `fstproject` convert the FST into a FSA in either the input or output space by discarding the appropriate labels
 
 #Examples provided here
 
@@ -203,19 +203,19 @@ They can be downloaded from the [Git backing this site](https://github.com/oxina
 
 
 ###NOTE: The example scripts assume `openfst/bin` is in your `PATH`.
-Add to your .bashrc (or similar) `PATH="<...>/kaldi-trunk/tools/openfst/bin:${PATH}"`, where `<...>` is the math to the kaldi-trunk folder.
+Add to your `.bashrc` (or similar) `PATH="<...>/kaldi-trunk/tools/openfst/bin:${PATH}"`, where `<...>` is the math to the kaldi-trunk folder.
 then `source ~/.bashrc`
 
 
 ###makeSymbols.py
-makeSymbols.py is a script to make creating the SymbolTables (which map symbols to arbitary unique integers) easier.
+makeSymbols.py is a script to make creating the symbol tables (which map symbols to arbitary unique integers) easier.
 
 Usage: `python makeSymbols.py file fieldNumber`
 
  - `file`: the textual FST/FSA file (`.fst.txt` or `.fsa.txt usually`), to extract the symbols from
  - `fieldNumber`: which column of the file to take symbols from
      - input symbols use `fieldNumber` of 2
-     - output symbolss use `fieldNumber` of 3
+     - output symbols use `fieldNumber` of 3
 
 The Symbols Table is output to standard out, and can be piped into a file
 
@@ -225,11 +225,11 @@ Runs the whole process of compiling then drawing a FST/FSA.
 Usage FSA:  `bash compileAndDraw.sh filename.fsa.txt`
 Usage FST:  `bash compileAndDraw.sh filename.fst.txt`
 
-Note: unlike  openfst programs this is file extention sensitive.
-It will make the approprate call for a FSA or a FST based on the extention. 
+Note: unlike  openfst programs this is file extension sensitive.
+It will make the appropriate call for a FSA or a FST based on the extension. 
 
 ###composeExample.sh
-This example runs though the creation then compostion of the `dict.fst` and `sent.fsa`. It then outputs some sentences generated using the language model descried.
+This example runs though the creation then composition of the `dict.fst` and `sent.fsa`. It then outputs some sentences generated using the language model descried.
 
 Usage: `bash composeExample.sh`
 
@@ -244,7 +244,7 @@ A  very simple Finite State Accepter.
 A dictionary containing several words. There is only state in the dictionary -- as far it its concerns words can be in any order
 
 ##[sent.fsa.txt](./sent.fsa.txt)
-A grammar for a simple sentence, expessed as a finite state acceptor.
+A grammar for a simple sentence, expressed as a finite state acceptor.
 Sentences can either be `determiner noun verb` or `determiner noun verb determiner noun`.
 
 
