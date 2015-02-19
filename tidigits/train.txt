@@ -19,7 +19,7 @@ rather than making references to `queue.pl`.
 Training (and testing), will still be split into multiple jobs, each handling different subsets of the data.
 
 
-#Training/Evaluating Recognizer
+#Training Recognizer
 This section is covered by [this section of the kaldi tutorial](http://kaldi.sourceforge.net/tutorial_running.html#tutorial_running_monophone).
 
 The majority of the steps covered in this page, are triggered by the script `run.sh`
