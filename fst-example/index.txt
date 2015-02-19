@@ -223,7 +223,7 @@ Usage: `python makeSymbols.py file fieldNumber`
 The Symbols Table is output to standard out, and can be piped into a file
 
 ###[compileAndDraw.sh](compileAndDraw.sh)
-the [complieAndDraw.sh](complieAndDraw.sh) is a simple bash script that runs the whole process of compiling then drawing a FST/FSA.
+the [compileAndDraw.sh](compileAndDraw.sh) is a simple bash script that runs the whole process of compiling then drawing a FST/FSA.
 
 Usage FSA:  `bash compileAndDraw.sh filename.fsa.txt`
 Usage FST:  `bash compileAndDraw.sh filename.fst.txt`
