@@ -7,19 +7,20 @@ title: Installing Kaldi
 #Installing Kaldi
 
 ##Building Kaldi
-- Following instructions at: http://kaldi.sourceforge.net/tutorial_setup.html
+- Follow the [official instructions](http://kaldi.sourceforge.net/tutorial_setup.html)
 
  - first `cd` to `/kaldi-trunk/tools` then do a `make -j 8` to build to tools kaldi uses
     - Issue: Requires libtool
-        - Resolution: Build and install libtool, I did so by installing from source: http://ftpmirror.gnu.org/libtool/libtool-2.4.5.tar.gz locally (via configure --prefix)
+        - Resolution: Build and install libtool, I did so by installing from [source](http://ftpmirror.gnu.org/libtool/libtool-2.4.5.tar.gz) locally (via configure --prefix)
+	- Resolution (alternative): Install with package manage (`apt-get`)
  - then try and build kaldi, first running .configure
     - Issue: Needs a BLAS.
         - Resolution: use OpenBlas
-            - go back to `/kaldi-trunk/tools` and `make openblas` 
+            - go back to `/kaldi-trunk/tools` and `make -j 8 openblas` 
             - use it by running `./configure  --openblas-root=../tools/OpenBLAS/install`
     - Issue: this Kaldi won't run with GCC 4.8.4
         - Resolution: install newer GCC from source
-            - Follow instructions at https://gcc.gnu.org/wiki/InstallingGCC
+            - Follow instructions from [GCC website](https://gcc.gnu.org/wiki/InstallingGCC)
                 - in particular for getting the dependencies
             - When it comes to running configure use: `../gcc-4.9.2/configure --disable-multilib`
             - when doing use `make -j 8` or it will take a very long time to build
