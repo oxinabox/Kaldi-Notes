@@ -119,6 +119,7 @@ header h2 {
   border-style: solid;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  display: none;
 }
 
 .navtop {
