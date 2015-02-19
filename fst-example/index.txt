@@ -200,15 +200,18 @@ but do not have space to detail include;
 Several scripts are provided here to demonstrate how to make use of OpenFST,
 and to make using it easier.
 They can be downloaded from the [Git backing this site](https://github.com/oxinabox/Kaldi-Notes/tree/gh-pages/fst-example).
+The section names below are also hyperlinks to download those scripts/files.
 
-
-###NOTE: The example scripts assume `openfst/bin` is in your `PATH`.
+###NOTE: 
+The example scripts assume openfst binaries are in  your `PATH`.
+If you added all kaldi binerys during install step you will already have them.
+Otherwise you can add just the Openfst binaries by:
 Add to your `.bashrc` (or similar) `PATH="<...>/kaldi-trunk/tools/openfst/bin:${PATH}"`, where `<...>` is the math to the kaldi-trunk folder.
 then `source ~/.bashrc`
 
 
-###makeSymbols.py
-makeSymbols.py is a script to make creating the symbol tables (which map symbols to arbitary unique integers) easier.
+###[makeSymbols.py](makeSymbols.py)
+[makeSymbols.py](makeSymbols.py) is a script to make creating the symbol tables (which map symbols to arbitary unique integers) easier.
 
 Usage: `python makeSymbols.py file fieldNumber`
 
@@ -219,8 +222,8 @@ Usage: `python makeSymbols.py file fieldNumber`
 
 The Symbols Table is output to standard out, and can be piped into a file
 
-###compileAndDraw.sh
-Runs the whole process of compiling then drawing a FST/FSA.
+###[compileAndDraw.sh](compileAndDraw.sh)
+the [complieAndDraw.sh](complieAndDraw.sh) is a simple bash script that runs the whole process of compiling then drawing a FST/FSA.
 
 Usage FSA:  `bash compileAndDraw.sh filename.fsa.txt`
 Usage FST:  `bash compileAndDraw.sh filename.fst.txt`
@@ -228,8 +231,8 @@ Usage FST:  `bash compileAndDraw.sh filename.fst.txt`
 Note: unlike  openfst programs this is file extension sensitive.
 It will make the appropriate call for a FSA or a FST based on the extension. 
 
-###composeExample.sh
-This example runs though the creation then composition of the `dict.fst` and `sent.fsa`. It then outputs some sentences generated using the language model descried.
+###[composeExample.sh](composeExample.sh)
+The [composeExample.sh](composeExample.sh) script runs though the creation then composition of the `dict.fst` and `sent.fsa`. It then outputs some sentences generated using the language model descried.
 
 Usage: `bash composeExample.sh`
 
@@ -238,14 +241,13 @@ This folder contains 3 examples:
 The later two examples of sentence construction are based on ones provided in [these lecture notes](http://www.isle.illinois.edu/sst/courses/minicourses/2009/lecture6.pdf)
 
 ##[simple.fsa.txt](./simple.fsa.txt)
-A  very simple Finite State Accepter.
+[simple.fsa.txt](./simple.fsa.txt) is a  very simple Finite State Accepter.
 
 ##[dict.fst.txt](./dict.fst.txt)
-A dictionary containing several words. There is only state in the dictionary -- as far it its concerns words can be in any order
+[dict.fst.txt](./dict.fst.txt) is a dictionary containing several words. There is only state in the dictionary -- as far it its concerns words can be in any order
 
 ##[sent.fsa.txt](./sent.fsa.txt)
-A grammar for a simple sentence, expressed as a finite state acceptor.
-Sentences can either be `determiner noun verb` or `determiner noun verb determiner noun`.
+[sent.fsa.txt](./sent.fsa.txt) is a  grammar for a simple sentence, expressed as a finite state acceptor. Sentences can either be `determiner noun verb` or `determiner noun verb determiner noun`.
 
 
 
