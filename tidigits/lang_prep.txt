@@ -7,7 +7,7 @@ title: Language Preparation
 
 This section covers the same content as the recipe script in `/local/tidigits_prepare_lang.sh`
 
-To understand this section you should first [understand openFST]( ../fst-example/intro_to_OpenFST.md).
+To understand this section you should first [understand openFST]( ../fst-example).
 
 
 
