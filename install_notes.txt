@@ -7,9 +7,11 @@ title: Installing Kaldi
 #Installing Kaldi
 
 ##Building Kaldi
-- Follow the [official instructions](http://kaldi.sourceforge.net/tutorial_setup.html)
+Follow the [official instructions](http://kaldi.sourceforge.net/tutorial_setup.html)
 
- - first `cd` to `/kaldi-trunk/tools` then do a `make -j 8` to build to tools kaldi uses
+Do not forget to first `cd` to `/kaldi-trunk/tools` then do a `make -j 8` to build to tools kaldi usesi.
+
+###Issues
     - Issue: Requires libtool
         - Resolution: Build and install libtool, I did so by installing from [source](http://ftpmirror.gnu.org/libtool/libtool-2.4.5.tar.gz) locally (via configure --prefix)
 	- Resolution (alternative): Install with package manage (`apt-get`)
